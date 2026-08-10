@@ -2,14 +2,6 @@
 import DueChip from '../atoms/DueChip.astro';
 import type { SpineCard } from '../../i18n/landing';
 
-/*
-  Satu kartu yang menggantung di bawah hari jatuh temponya pada week spine.
-
-  `startDay` diterjemahkan ke kelas Tailwind lewat tabel, bukan lewat template
-  string seperti `sm:col-start-${startDay}`. Tailwind memindai kode sumber
-  sebagai teks biasa dan tidak menjalankannya, jadi kelas yang baru terbentuk
-  saat runtime tidak akan pernah ikut ke CSS hasil build.
-*/
 interface Props {
   card: SpineCard;
 }

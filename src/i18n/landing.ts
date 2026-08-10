@@ -1,23 +1,8 @@
 import type { Locale } from './index';
 
-/*
-  Salinan halaman landing dipisah dari `dictionaries.ts`.
-
-  Dictionary aplikasi berisi label antarmuka yang dibaca React setelah login;
-  file ini berisi teks pemasaran yang dibaca Astro saat build dan tidak pernah
-  ikut ke bundle JavaScript. Memisahkannya menjaga bundle aplikasi tetap kecil
-  dan membuat jelas teks mana yang boleh dilihat mesin pencari.
-*/
-
-/*
-  Domain produksi. Dipakai untuk canonical dan hreflang, yang wajib absolut —
-  URL relatif diabaikan mesin pencari pada dua tag itu.
-*/
 export const SITE_URL: string =
   import.meta.env.PUBLIC_SITE_URL ?? 'https://frontendtrackora.vercel.app';
 
-/* Bahasa Indonesia tinggal di root, bukan di /id, supaya tidak ada dua URL
-   dengan isi sama persis — mesin pencari menghitungnya sebagai konten ganda. */
 export function landingPath(locale: Locale): string {
   return locale === 'id' ? '/' : `/${locale}`;
 }
@@ -29,7 +14,6 @@ export function landingUrl(locale: Locale): string {
 export type CardTone = 'overdue' | 'due-soon' | 'plain';
 
 export interface SpineCard {
-  /* Kolom hari 1–7. Kartu selalu mengisi dua kolom, jadi mulai maksimal di 6. */
   readonly startDay: 1 | 2 | 3 | 4 | 5 | 6;
   readonly title: string;
   readonly due: string;
@@ -44,7 +28,6 @@ export interface Capability {
 
 export interface LandingCopy {
   readonly htmlLang: string;
-  /* Open Graph menuntut bentuk bahasa_WILAYAH, bukan kode bahasa telanjang. */
   readonly ogLocale: string;
   readonly documentTitle: string;
   readonly metaDescription: string;
@@ -54,16 +37,8 @@ export interface LandingCopy {
   readonly lede: string;
   readonly primaryCta: string;
   readonly secondaryCta: string;
-  /*
-    Tautan di header menuju /login, bukan /boards, jadi teksnya harus berbeda
-    dari primaryCta — dua tautan dengan label sama tapi tujuan berbeda membuat
-    orang menebak-nebak. Kata-katanya diambil sama dengan `auth.login` di
-    kamus aplikasi supaya tombolnya tidak berganti nama di tengah alur.
-  */
   readonly signInCta: string;
-
   readonly weekEyebrow: string;
-  /* Tujuh inisial hari, mulai Senin. */
   readonly dayInitials: readonly string[];
   readonly todayLabel: string;
   readonly spineCards: readonly SpineCard[];

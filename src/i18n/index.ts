@@ -3,11 +3,6 @@ import { en, id, zh, type Dictionary, type TranslationKey } from './dictionaries
 export type Locale = 'id' | 'en' | 'zh';
 export type { TranslationKey };
 
-/*
-  Diekspor supaya halaman landing yang statis bisa menulis kunci yang sama
-  lewat skrip inline. Kalau kuncinya diketik ulang di sana, pilihan bahasa di
-  landing tidak akan terbaca aplikasi dan bug-nya sulit dilacak.
-*/
 export const LOCALE_KEY = 'trackora.v1.locale';
 
 const DICTIONARIES: Record<Locale, Dictionary> = { id, en, zh };
@@ -36,8 +31,7 @@ export function readLocale(): Locale {
   try {
     const stored = localStorage.getItem(LOCALE_KEY);
     if (isLocale(stored)) return stored;
-  } catch {
-  }
+  } catch {}
 
   if (typeof navigator !== 'undefined') {
     const tag = navigator.language.toLowerCase();
@@ -50,10 +44,8 @@ export function readLocale(): Locale {
 export function storeLocale(locale: Locale): void {
   try {
     localStorage.setItem(LOCALE_KEY, locale);
-  } catch {
-  }
+  } catch {}
 }
-
 
 export function createTranslator(locale: Locale): Translate {
   const dictionary = DICTIONARIES[locale];

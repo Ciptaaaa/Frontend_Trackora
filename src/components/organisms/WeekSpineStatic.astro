@@ -2,34 +2,17 @@
 import Eyebrow from '../atoms/Eyebrow.astro';
 import SpineCard from '../molecules/SpineCard.astro';
 import type { LandingCopy } from '../../i18n/landing';
-
-/*
-  Elemen penanda halaman ini: penggaris satu minggu dengan kartu menggantung di
-  hari jatuh temponya.
-
-  Dipilih karena inilah yang membedakan Trackora dari papan kanban pada
-  umumnya. Papan bercerita tentang tahapan; tampilan ini bercerita tentang
-  waktu, dan waktu adalah yang sebenarnya membuat orang membuka aplikasinya.
-  Memajang tangkapan layar papan biasa akan menjual hal yang salah.
-
-  Seluruhnya HTML dan CSS. Tidak ada satu byte JavaScript yang dikirim untuk
-  bagian ini.
-*/
 interface Props {
   copy: LandingCopy;
 }
 
 const { copy } = Astro.props;
 
-/*
-  Rabu. Angkanya dipaku, bukan diambil dari tanggal asli, karena halaman ini
-  dirender sekali saat build — tanggal asli akan membeku di hari deploy dan
-  perlahan berubah jadi bohong. Yang ditunjukkan di sini adalah bentuk
-  tampilannya, dan bentuk itu tidak pernah kedaluwarsa.
-*/
 const TODAY_INDEX = 2;
 
-const daysWithCards = new Set(copy.spineCards.map((card) => card.startDay));
+const daysWithCards: ReadonlySet<number> = new Set<number>(
+  copy.spineCards.map((card) => card.startDay),
+);
 ---
 
 <figure

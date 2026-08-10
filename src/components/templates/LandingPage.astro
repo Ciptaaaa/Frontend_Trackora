@@ -6,11 +6,6 @@ import LandingFooter from '../organisms/LandingFooter.astro';
 import { LANDING_COPY } from '../../i18n/landing';
 import type { Locale } from '../../i18n';
 
-/*
-  Template menerima `locale` saja, lalu mengambil salinannya sendiri. Halaman
-  di src/pages jadi tinggal menyebut bahasanya, dan tidak ada satu pun rute
-  yang bisa lupa meneruskan salah satu bagian teks.
-*/
 interface Props {
   locale: Locale;
 }

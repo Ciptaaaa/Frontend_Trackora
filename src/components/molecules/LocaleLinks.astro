@@ -2,19 +2,6 @@
 import { LOCALES, type Locale } from '../../i18n';
 import { landingPath } from '../../i18n/landing';
 
-/*
-  Pemilih bahasa versi landing.
-
-  Bentuknya <a> sungguhan, bukan tombol yang menukar teks di tempat. Bedanya
-  penting: perayap mesin pencari mengikuti tautan tapi tidak menekan tombol,
-  jadi hanya versi ini yang membuat ketiga bahasa benar-benar terindeks. Tanpa
-  JavaScript pun tetap berfungsi.
-
-  Komponen ini muncul dua kali per halaman (header dan footer), jadi skrip
-  penyimpan pilihan bahasa tidak ditaruh di sini — kalau ditaruh di sini,
-  pendengar klik-nya terpasang dua kali. Skripnya ada sekali saja di
-  LandingLayout.astro dan menyasar [data-locale-links] mana pun di halaman.
-*/
 interface Props {
   current: Locale;
   tone?: 'ink' | 'nav';

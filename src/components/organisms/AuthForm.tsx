@@ -1,4 +1,4 @@
-import { useId, useState, type FormEvent } from 'react';
+import { useId, useState } from 'react';
 import Button from '../atoms/Button';
 import Icon from '../atoms/Icon';
 import TextField from '../atoms/TextField';
@@ -36,7 +36,7 @@ export default function AuthForm({
     onModeChange(next);
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
 

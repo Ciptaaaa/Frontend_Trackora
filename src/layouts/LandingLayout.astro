@@ -3,14 +3,6 @@ import '../styles/global.css';
 import { LOCALES, LOCALE_KEY, type Locale } from '../i18n';
 import { LANDING_COPY, landingUrl } from '../i18n/landing';
 
-/*
-  Layout terpisah dari Layout.astro milik aplikasi.
-
-  Aplikasi ada di balik login, jadi head-nya tidak butuh apa pun untuk mesin
-  pencari. Halaman ini sebaliknya: canonical dan hreflang justru satu-satunya
-  alasan bahasa ditaruh di URL. Menumpuk keduanya di satu layout akan mengirim
-  tag hreflang ke halaman yang tidak akan pernah terindeks.
-*/
 interface Props {
   locale: Locale;
 }
@@ -32,12 +24,6 @@ const canonical = landingUrl(locale);
     <title>{copy.documentTitle}</title>
     <meta name="description" content={copy.metaDescription} />
     <link rel="canonical" href={canonical} />
-
-    {/*
-      Tiap versi bahasa menyebut dirinya sendiri dan kedua saudaranya. Kalau
-      salah satu versi tidak menyebut yang lain, mesin pencari memperlakukan
-      hubungannya sebagai tidak sah dan mengabaikan seluruh kelompoknya.
-    */}
     {
       LOCALES.map((entry) => (
         <link
@@ -55,12 +41,6 @@ const canonical = landingUrl(locale);
     <meta property="og:description" content={copy.metaDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={copy.ogLocale} />
-    {/*
-      og:image sengaja belum ada. Kartu pratinjau tanpa gambar tetap tampil
-      rapi dengan judul dan deskripsi, sementara menunjuk ke berkas yang tidak
-      ada justru membuat pratinjaunya kosong. Kalau nanti gambarnya dibuat,
-      pakai PNG atau JPG 1200x630 — SVG ditolak hampir semua platform.
-    */}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,13 +48,6 @@ const canonical = landingUrl(locale);
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap"
     />
-
-    {/*
-      Tema dibaca sebelum paint supaya tidak ada kedipan putih di dark mode.
-      Bahasa sengaja tidak disentuh di sini: atribut lang halaman ini sudah
-      ditentukan URL-nya, dan menimpanya dari localStorage akan membuat
-      halaman /en mengaku berbahasa Indonesia sementara isinya Inggris.
-    */}
     <script is:inline>
       (() => {
         try {
@@ -96,18 +69,6 @@ const canonical = landingUrl(locale);
   </head>
   <body class="h-full bg-paper-100 antialiased">
     <slot />
-
-    {/*
-      Menitipkan bahasa yang dipilih ke localStorage supaya aplikasi di balik
-      login terbuka dengan bahasa yang sama. Sifatnya tambahan: kalau skrip ini
-      gagal jalan, tautannya tetap membawa ke halaman yang benar.
-
-      Ditaruh di layout, bukan di LocaleLinks, karena pemilih bahasa muncul dua
-      kali per halaman (header dan footer) — skrip di komponennya akan ikut
-      tercetak dua kali dan memasang pendengar klik ganda. Pendengarnya juga
-      dipasang di document, bukan di tiap tautan, jadi berapa pun jumlah
-      pemilih bahasa di halaman ini tetap satu pendengar.
-    */}
     <script is:inline define:vars={{ storageKey: LOCALE_KEY }}>
       document.addEventListener('click', (event) => {
         const target = event.target;

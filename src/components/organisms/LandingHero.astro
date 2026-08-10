@@ -3,15 +3,6 @@ import Eyebrow from '../atoms/Eyebrow.astro';
 import WeekSpineStatic from './WeekSpineStatic.astro';
 import type { LandingCopy } from '../../i18n/landing';
 
-/*
-  Susunannya sengaja timpang: teks mengambil lima kolom, artefak tujuh. Kalau
-  dibagi rata, dua sisi saling bersaing dan mata tidak tahu harus mulai dari
-  mana. Dengan begini judul yang dibaca lebih dulu, lalu pandangan jatuh ke
-  penggaris minggunya.
-
-  `items-center` hanya menyala mulai lg. Di bawah itu keduanya bertumpuk dan
-  perataan vertikal tidak ada artinya.
-*/
 interface Props {
   copy: LandingCopy;
 }

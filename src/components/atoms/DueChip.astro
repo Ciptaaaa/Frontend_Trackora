@@ -1,15 +1,6 @@
 ---
 import type { CardTone } from '../../i18n/landing';
 
-/*
-  Versi statis dari DueBadge milik aplikasi.
-
-  Sengaja tidak mengimpor komponen React-nya: badge asli menghitung selisih
-  tanggal saat dijalankan, sementara halaman ini dirender sekali saat build.
-  Kalau tanggal aslinya dipakai, teksnya akan membeku di hari build dan makin
-  lama makin salah. Yang dipajang di sini adalah contoh tampilan, jadi warnanya
-  ditentukan langsung lewat `tone` dan tidak pernah basi.
-*/
 interface Props {
   tone: CardTone;
   label: string;

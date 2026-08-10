@@ -4,13 +4,6 @@ import LocaleLinks from '../molecules/LocaleLinks.astro';
 import type { Locale } from '../../i18n';
 import type { LandingCopy } from '../../i18n/landing';
 
-/*
-  Logo diimpor dari atom React yang sudah ada, tanpa `client:*`. Astro
-  merendernya jadi HTML biasa saat build, jadi tandanya identik dengan yang di
-  dalam aplikasi tanpa mengirim React ke halaman ini. Menyalin markup-nya ke
-  file .astro terpisah akan membuat dua sumber kebenaran yang pasti berbeda
-  suatu hari nanti.
-*/
 interface Props {
   locale: Locale;
   copy: LandingCopy;
