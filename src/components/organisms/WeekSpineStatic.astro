@@ -1,0 +1,79 @@
+---
+import Eyebrow from '../atoms/Eyebrow.astro';
+import SpineCard from '../molecules/SpineCard.astro';
+import type { LandingCopy } from '../../i18n/landing';
+
+/*
+  Elemen penanda halaman ini: penggaris satu minggu dengan kartu menggantung di
+  hari jatuh temponya.
+
+  Dipilih karena inilah yang membedakan Trackora dari papan kanban pada
+  umumnya. Papan bercerita tentang tahapan; tampilan ini bercerita tentang
+  waktu, dan waktu adalah yang sebenarnya membuat orang membuka aplikasinya.
+  Memajang tangkapan layar papan biasa akan menjual hal yang salah.
+
+  Seluruhnya HTML dan CSS. Tidak ada satu byte JavaScript yang dikirim untuk
+  bagian ini.
+*/
+interface Props {
+  copy: LandingCopy;
+}
+
+const { copy } = Astro.props;
+
+/*
+  Rabu. Angkanya dipaku, bukan diambil dari tanggal asli, karena halaman ini
+  dirender sekali saat build — tanggal asli akan membeku di hari deploy dan
+  perlahan berubah jadi bohong. Yang ditunjukkan di sini adalah bentuk
+  tampilannya, dan bentuk itu tidak pernah kedaluwarsa.
+*/
+const TODAY_INDEX = 2;
+
+const daysWithCards = new Set(copy.spineCards.map((card) => card.startDay));
+---
+
+<figure
+  class="rounded-2xl bg-paper-50 p-5 shadow-xl ring-1 ring-paper-300 sm:p-6"
+>
+  <figcaption class="flex items-baseline justify-between gap-4">
+    <Eyebrow text={copy.weekEyebrow} />
+    <span class="font-mono text-[11px] text-petrol-400">{copy.todayLabel}</span>
+  </figcaption>
+
+  <!-- Penggaris hari -->
+  <div class="mt-4 grid grid-cols-7 gap-1.5">
+    {
+      copy.dayInitials.map((initial, index) => (
+        <div class="flex flex-col items-center gap-1.5">
+          <span
+            class:list={[
+              'font-mono text-xs',
+              index === TODAY_INDEX
+                ? 'font-semibold text-petrol-600'
+                : 'text-ink-400',
+            ]}
+          >
+            {initial}
+          </span>
+          <span
+            class:list={[
+              'h-0.5 w-full rounded-full',
+              index === TODAY_INDEX ? 'bg-petrol-600' : 'bg-paper-300',
+            ]}
+          />
+          <span
+            class:list={[
+              'size-1 rounded-full',
+              daysWithCards.has(index + 1) ? 'bg-petrol-400' : 'bg-transparent',
+            ]}
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Kartu, menempel di kolom hari jatuh temponya -->
+  <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-7">
+    {copy.spineCards.map((card) => <SpineCard card={card} />)}
+  </div>
+</figure>

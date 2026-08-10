@@ -1,0 +1,30 @@
+---
+import type { Capability } from '../../i18n/landing';
+
+/*
+  Satu baris kemampuan.
+
+  Tidak dinomori. Penomoran 01/02/03 hanya jujur kalau isinya memang berurutan —
+  daftar ini tidak: papan, jatuh tempo, label, dan komentar berdiri sendiri dan
+  bisa dibaca dari mana saja. Yang dipakai sebagai penanda struktur cukup garis
+  rambut di atas tiap baris dan label mono, yang menyampaikan pengelompokan
+  tanpa mengaku-ngaku ada urutan.
+*/
+interface Props {
+  capability: Capability;
+}
+
+const { capability } = Astro.props;
+---
+
+<div class="border-t border-paper-300 pt-5">
+  <p class="font-mono text-[11px] tracking-[0.16em] text-petrol-400 uppercase">
+    {capability.label}
+  </p>
+  <h3 class="mt-3 font-display text-lg leading-tight font-semibold text-ink-900">
+    {capability.title}
+  </h3>
+  <p class="mt-2 max-w-prose text-sm leading-relaxed text-ink-600">
+    {capability.body}
+  </p>
+</div>

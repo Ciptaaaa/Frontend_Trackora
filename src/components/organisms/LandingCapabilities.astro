@@ -1,0 +1,32 @@
+---
+import Eyebrow from '../atoms/Eyebrow.astro';
+import CapabilityRow from '../molecules/CapabilityRow.astro';
+import type { LandingCopy } from '../../i18n/landing';
+
+interface Props {
+  copy: LandingCopy;
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="border-t border-paper-300 bg-paper-50">
+  <div class="mx-auto max-w-6xl px-5 py-20 sm:px-8 lg:py-24">
+    <div class="max-w-2xl">
+      <Eyebrow text={copy.capabilitiesEyebrow} />
+      <h2
+        class="mt-4 font-display text-2xl leading-tight font-semibold tracking-tight text-balance text-ink-900 sm:text-3xl"
+      >
+        {copy.capabilitiesHeading}
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-10 sm:grid-cols-2 lg:gap-x-16">
+      {
+        copy.capabilities.map((capability) => (
+          <CapabilityRow capability={capability} />
+        ))
+      }
+    </div>
+  </div>
+</section>

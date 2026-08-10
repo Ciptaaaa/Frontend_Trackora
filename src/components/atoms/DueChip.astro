@@ -1,0 +1,34 @@
+---
+import type { CardTone } from '../../i18n/landing';
+
+/*
+  Versi statis dari DueBadge milik aplikasi.
+
+  Sengaja tidak mengimpor komponen React-nya: badge asli menghitung selisih
+  tanggal saat dijalankan, sementara halaman ini dirender sekali saat build.
+  Kalau tanggal aslinya dipakai, teksnya akan membeku di hari build dan makin
+  lama makin salah. Yang dipajang di sini adalah contoh tampilan, jadi warnanya
+  ditentukan langsung lewat `tone` dan tidak pernah basi.
+*/
+interface Props {
+  tone: CardTone;
+  label: string;
+}
+
+const { tone, label } = Astro.props;
+
+const toneClass: Record<CardTone, string> = {
+  overdue: 'bg-berry-100 text-berry-700',
+  'due-soon': 'bg-saffron-100 text-saffron-600',
+  plain: 'bg-paper-200 text-ink-400',
+};
+---
+
+<span
+  class:list={[
+    'inline-flex items-center rounded-md px-1.5 py-0.5 font-mono text-[10px] font-medium',
+    toneClass[tone],
+  ]}
+>
+  {label}
+</span>

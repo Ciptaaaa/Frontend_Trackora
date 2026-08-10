@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Trackora',
+  description = 'Papan kerja pribadi — lacak apa yang sedang jalan dan kapan jatuh temponya.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id" class="w-auto h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap"
+    />
+
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('trackora.v1.theme');
+          const preference = stored === 'light' || stored === 'dark' || stored === 'system'
+            ? stored
+            : 'system';
+          const dark =
+            preference === 'dark' ||
+            (preference === 'system' &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+
+          const locale = localStorage.getItem('trackora.v1.locale');
+          if (locale === 'en' || locale === 'zh' || locale === 'id') {
+            document.documentElement.lang = locale === 'zh' ? 'zh-CN' : locale;
+          }
+        } catch {
+        }
+      })();
+    </script>
+  </head>
+  <body class="h-full bg-paper-200 antialiased">
+    <slot />
+  </body>
+</html>

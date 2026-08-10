@@ -1,0 +1,69 @@
+---
+import Eyebrow from '../atoms/Eyebrow.astro';
+import WeekSpineStatic from './WeekSpineStatic.astro';
+import type { LandingCopy } from '../../i18n/landing';
+
+/*
+  Susunannya sengaja timpang: teks mengambil lima kolom, artefak tujuh. Kalau
+  dibagi rata, dua sisi saling bersaing dan mata tidak tahu harus mulai dari
+  mana. Dengan begini judul yang dibaca lebih dulu, lalu pandangan jatuh ke
+  penggaris minggunya.
+
+  `items-center` hanya menyala mulai lg. Di bawah itu keduanya bertumpuk dan
+  perataan vertikal tidak ada artinya.
+*/
+interface Props {
+  copy: LandingCopy;
+}
+
+const { copy } = Astro.props;
+
+const primaryCtaClass =
+  'inline-flex items-center justify-center gap-2 rounded-xl bg-petrol-600 px-5 py-3 text-sm font-semibold text-onaccent transition-colors hover:bg-petrol-700';
+
+const secondaryCtaClass =
+  'inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-ink-600 ring-1 ring-paper-300 transition-colors hover:bg-paper-200 hover:text-ink-900';
+---
+
+<section class="mx-auto max-w-6xl px-5 pt-8 pb-20 sm:px-8 sm:pt-14 lg:pb-28">
+  <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+    <div class="lg:col-span-5">
+      <Eyebrow text={copy.eyebrow} />
+
+      <h1
+        class="mt-5 max-w-[15ch] font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance text-ink-900 sm:text-5xl lg:text-[3.4rem]"
+      >
+        {copy.headline}
+      </h1>
+
+      <p class="mt-6 max-w-md text-base leading-relaxed text-ink-600">
+        {copy.lede}
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <a href="/boards" class={primaryCtaClass}>
+          {copy.primaryCta}
+          <svg
+            viewBox="0 0 16 16"
+            class="size-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 8h10M9 4l4 4-4 4" />
+          </svg>
+        </a>
+        <a href="/register" class={secondaryCtaClass}>
+          {copy.secondaryCta}
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7">
+      <WeekSpineStatic copy={copy} />
+    </div>
+  </div>
+</section>

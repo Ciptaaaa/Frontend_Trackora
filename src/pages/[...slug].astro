@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrackoraApp from '../components/templates/TrackoraApp.tsx';
+export function getStaticPaths(): Array<{ params: { slug: string } }> {
+  return [{ slug: 'login' }, { slug: 'register' }, { slug: 'boards' }].map(
+    ({ slug }) => ({ params: { slug } }),
+  );
+}
+---
+
+<Layout title="Trackora — Papan kerja">
+  <TrackoraApp client:load />
+</Layout>

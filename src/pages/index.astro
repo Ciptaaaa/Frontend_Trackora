@@ -1,0 +1,17 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import LandingPage from '../components/templates/LandingPage.astro';
+
+/*
+  Landing bahasa Indonesia, sekaligus akar situs.
+
+  Bahasa default tinggal di "/" dan bukan di "/id" supaya tidak ada dua alamat
+  dengan isi identik. Aplikasinya sendiri tidak lagi dirender di sini; pintu
+  masuknya ada di /boards dan /login lewat [...slug].astro, dan TrackoraApp
+  yang memutuskan mana yang ditampilkan berdasarkan sesi.
+*/
+---
+
+<LandingLayout locale="id">
+  <LandingPage locale="id" />
+</LandingLayout>

@@ -1,0 +1,29 @@
+---
+import LandingHeader from '../organisms/LandingHeader.astro';
+import LandingHero from '../organisms/LandingHero.astro';
+import LandingCapabilities from '../organisms/LandingCapabilities.astro';
+import LandingFooter from '../organisms/LandingFooter.astro';
+import { LANDING_COPY } from '../../i18n/landing';
+import type { Locale } from '../../i18n';
+
+/*
+  Template menerima `locale` saja, lalu mengambil salinannya sendiri. Halaman
+  di src/pages jadi tinggal menyebut bahasanya, dan tidak ada satu pun rute
+  yang bisa lupa meneruskan salah satu bagian teks.
+*/
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = LANDING_COPY[locale];
+---
+
+<div class="flex min-h-full flex-col">
+  <LandingHeader locale={locale} copy={copy} />
+  <main class="flex-1">
+    <LandingHero copy={copy} />
+    <LandingCapabilities copy={copy} />
+  </main>
+  <LandingFooter locale={locale} copy={copy} />
+</div>

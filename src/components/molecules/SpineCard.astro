@@ -1,0 +1,42 @@
+---
+import DueChip from '../atoms/DueChip.astro';
+import type { SpineCard } from '../../i18n/landing';
+
+/*
+  Satu kartu yang menggantung di bawah hari jatuh temponya pada week spine.
+
+  `startDay` diterjemahkan ke kelas Tailwind lewat tabel, bukan lewat template
+  string seperti `sm:col-start-${startDay}`. Tailwind memindai kode sumber
+  sebagai teks biasa dan tidak menjalankannya, jadi kelas yang baru terbentuk
+  saat runtime tidak akan pernah ikut ke CSS hasil build.
+*/
+interface Props {
+  card: SpineCard;
+}
+
+const { card } = Astro.props;
+
+const columnClass: Record<SpineCard['startDay'], string> = {
+  1: 'sm:col-start-1',
+  2: 'sm:col-start-2',
+  3: 'sm:col-start-3',
+  4: 'sm:col-start-4',
+  5: 'sm:col-start-5',
+  6: 'sm:col-start-6',
+};
+---
+
+<article
+  class:list={[
+    'col-span-1 sm:col-span-2',
+    columnClass[card.startDay],
+    'rounded-xl bg-paper-50 p-3 shadow-sm ring-1 ring-paper-300',
+  ]}
+>
+  <p class="text-[13px] leading-snug font-medium text-ink-800">
+    {card.title}
+  </p>
+  <div class="mt-2">
+    <DueChip tone={card.tone} label={card.due} />
+  </div>
+</article>

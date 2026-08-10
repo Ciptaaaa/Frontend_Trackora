@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* surfaces — light */
+  --color-paper-50: #ffffff;
+  --color-paper-100: #f6f8f4;
+  --color-paper-200: #eef1ea;
+  --color-paper-300: #d8ded1;
+  --color-paper-400: #a8b1a0;
+
+  /* text — light */
+  --color-ink-400: #5c6b64;
+  --color-ink-600: #33443d;
+  --color-ink-800: #1b2a25;
+  --color-ink-900: #0f1a16;
+
+  /* petrol — primary */
+  --color-petrol-50: #e9f2f1;
+  --color-petrol-200: #a9ccc9;
+  --color-petrol-400: #31716b;
+  --color-petrol-600: #14635f;
+  --color-petrol-700: #0f4c4a;
+  --color-petrol-900: #082e2d;
+
+  /* saffron — attention / due soon */
+  --color-saffron-100: #faedcf;
+  --color-saffron-400: #e3ac36;
+  --color-saffron-600: #815708;
+
+  /* berry — overdue / destructive */
+  --color-berry-100: #f7dfe6;
+  --color-berry-500: #a32c4e;
+  --color-berry-700: #7d1d3a;
+
+  /* Always-dark surfaces (sidebar, auth hero) + their always-light text. */
+  --color-nav-surface: #082e2d;
+  --color-nav-raised: #0f4c4a;
+  --color-nav-text: #f6f8f4;
+  --color-nav-muted: #8fa8a4;
+  --color-nav-border: #14504d;
+  --color-nav-accent: #14635f;
+
+  --color-onaccent: #f6f8f4;
+
+  --color-scrim: oklch(0.18 0.02 165 / 0.42);
+
+  --font-display:
+    'Bricolage Grotesque', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Archivo', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/*
+  Dark theme. Redefining the same variables means `bg-paper-50` becomes a dark
+  raised surface and `text-ink-900` becomes near-white automatically — the
+  contrast direction is preserved, so nothing ends up light-on-light.
+*/
+.dark {
+  --color-paper-50: #16211d;
+  --color-paper-100: #111a17;
+  --color-paper-200: #0b120f;
+  --color-paper-300: #2a3833;
+  --color-paper-400: #5d6d66;
+
+  --color-ink-400: #93a29b;
+  --color-ink-600: #c3cec8;
+  --color-ink-800: #e4eae5;
+  --color-ink-900: #f4f7f4;
+
+  --color-petrol-50: #10312f;
+  --color-petrol-200: #1d4c49;
+  --color-petrol-400: #4e9d97;
+  --color-petrol-600: #58b3ab;
+  --color-petrol-700: #7cc9c1;
+  --color-petrol-900: #dff0ee;
+
+  --color-saffron-100: #3a2c0d;
+  --color-saffron-400: #e8b955;
+  --color-saffron-600: #f0c877;
+
+  --color-berry-100: #3b1220;
+  --color-berry-500: #e8788f;
+  --color-berry-700: #f0a8bd;
+
+  --color-onaccent: #0b1614;
+
+  --color-scrim: oklch(0.08 0.01 165 / 0.62);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-petrol-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .dark input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(1) opacity(0.65);
+  }
+}
+
+@layer utilities {
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-paper-300) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background: var(--color-paper-300);
+    border-radius: 99px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

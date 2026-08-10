@@ -1,0 +1,57 @@
+---
+import { LOCALES, type Locale } from '../../i18n';
+import { landingPath } from '../../i18n/landing';
+
+/*
+  Pemilih bahasa versi landing.
+
+  Bentuknya <a> sungguhan, bukan tombol yang menukar teks di tempat. Bedanya
+  penting: perayap mesin pencari mengikuti tautan tapi tidak menekan tombol,
+  jadi hanya versi ini yang membuat ketiga bahasa benar-benar terindeks. Tanpa
+  JavaScript pun tetap berfungsi.
+
+  Komponen ini muncul dua kali per halaman (header dan footer), jadi skrip
+  penyimpan pilihan bahasa tidak ditaruh di sini — kalau ditaruh di sini,
+  pendengar klik-nya terpasang dua kali. Skripnya ada sekali saja di
+  LandingLayout.astro dan menyasar [data-locale-links] mana pun di halaman.
+*/
+interface Props {
+  current: Locale;
+  tone?: 'ink' | 'nav';
+}
+
+const { current, tone = 'ink' } = Astro.props;
+
+const inkTone = {
+  idle: 'text-ink-400 hover:bg-paper-200 hover:text-ink-900',
+  active: 'bg-paper-200 text-ink-900',
+};
+
+const navTone = {
+  idle: 'text-nav-muted hover:bg-nav-raised hover:text-nav-text',
+  active: 'bg-nav-raised text-nav-text',
+};
+
+const palette = tone === 'nav' ? navTone : inkTone;
+---
+
+<nav data-locale-links class="flex items-center gap-0.5">
+  {
+    LOCALES.map((entry) => (
+      <a
+        href={landingPath(entry.code)}
+        hreflang={entry.htmlLang}
+        lang={entry.htmlLang}
+        data-locale={entry.code}
+        aria-current={entry.code === current ? 'true' : undefined}
+        class:list={[
+          'rounded-lg px-2.5 py-1.5 font-mono text-[11px] tracking-[0.08em] transition-colors',
+          entry.code === current ? palette.active : palette.idle,
+        ]}
+      >
+        {entry.short}
+        <span class="sr-only"> — {entry.label}</span>
+      </a>
+    ))
+  }
+</nav>

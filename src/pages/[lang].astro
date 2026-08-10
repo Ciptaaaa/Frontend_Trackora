@@ -1,0 +1,40 @@
+---
+import LandingLayout from '../layouts/LandingLayout.astro';
+import LandingPage from '../components/templates/LandingPage.astro';
+import { LOCALES, type Locale } from '../i18n';
+
+/*
+  Landing untuk bahasa selain Indonesia: /en dan /zh.
+
+  Bahasa Indonesia tidak ikut di sini karena sudah tinggal di root lewat
+  index.astro. Menerbitkan /id juga akan menghasilkan dua URL dengan isi
+  identik, yang dihitung mesin pencari sebagai konten ganda.
+
+  Rute ini tidak bertabrakan dengan [...slug].astro. Astro membangun halaman
+  dari gabungan seluruh getStaticPaths, dan kedua daftarnya tidak beririsan:
+  di sini hanya en dan zh, di sana hanya login, register, dan boards.
+
+  `locale` dikirim lewat props, bukan dibaca dari Astro.params. Params selalu
+  bertipe string, jadi membacanya dari sana memaksa validasi ulang di setiap
+  halaman; lewat props tipenya sudah Locale sejak awal.
+*/
+export function getStaticPaths(): Array<{
+  params: { lang: string };
+  props: { locale: Locale };
+}> {
+  return LOCALES.filter((entry) => entry.code !== 'id').map((entry) => ({
+    params: { lang: entry.code },
+    props: { locale: entry.code },
+  }));
+}
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<LandingLayout locale={locale}>
+  <LandingPage locale={locale} />
+</LandingLayout>
