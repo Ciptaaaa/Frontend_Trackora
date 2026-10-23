@@ -1,10 +1,13 @@
 import type { Locale } from './index';
 
 export const SITE_URL: string =
-  import.meta.env.PUBLIC_SITE_URL ?? 'https://frontendtrackora.vercel.app';
+  import.meta.env.PUBLIC_SITE_URL ??
+  import.meta.env.SITE ??
+  'https://www.trackora.web.id';
 
 export function landingPath(locale: Locale): string {
-  return locale === 'id' ? '/' : `/${locale}`;
+  // Trailing slash mengikuti output build (en/index.html) dan URL di sitemap.
+  return locale === 'id' ? '/' : `/${locale}/`;
 }
 
 export function landingUrl(locale: Locale): string {
@@ -427,8 +430,7 @@ const zhCopy: LandingCopy = {
   ],
 
   ctaHeading: '从一块看板开始。',
-  ctaBody:
-    '创建第一块看板，整理清单，再放进正在推进的工作。之后随时可以调整。',
+  ctaBody: '创建第一块看板，整理清单，再放进正在推进的工作。之后随时可以调整。',
 
   navOverview: '视图',
   navHow: '工作方式',
