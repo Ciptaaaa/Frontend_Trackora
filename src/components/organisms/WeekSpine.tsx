@@ -25,14 +25,14 @@ export default function WeekSpine({
   return (
     <section
       aria-label={t('spine.aria')}
-      className="shrink-0 border-b border-paper-300/60 bg-paper-100 px-3 py-2.5 sm:px-5"
+      className="shrink-0 border-b border-paper-300 bg-paper-50 px-3 py-2.5 sm:px-4"
     >
       <div className="flex items-center gap-3">
         <div className="hidden w-40 shrink-0 flex-col lg:flex">
-          <span className="font-display text-[13px] leading-tight font-semibold text-ink-800">
+          <span className="text-[13px] leading-tight font-semibold tracking-[-0.01em] text-ink-800">
             {t('spine.title')}
           </span>
-          <span className="font-mono text-[10px] text-ink-400 tabular-nums">
+          <span className="text-[11px] text-ink-400 tabular-nums">
             {t('spine.summary', {
               month: formatMonthRange(days, locale),
               count: weekTotal,
@@ -53,21 +53,21 @@ export default function WeekSpine({
         {overdueCount > 0 && (
           <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-berry-100 px-2 py-1.5 text-[11px] font-medium text-berry-700">
             <Icon name="alert" className="size-3.5" />
-            <span className="font-mono tabular-nums">{overdueCount}</span>
+            <span className="tabular-nums">{overdueCount}</span>
             <span className="hidden lg:inline">{t('spine.overdue')}</span>
           </span>
         )}
       </div>
       {highlightDate !== null && (
         <div className="mt-2 flex items-center gap-2 rounded-lg bg-petrol-50 px-3 py-2">
-          <Icon name="calendar" className="size-3.5 shrink-0 text-petrol-600" />
-          <p className="min-w-0 flex-1 text-[11px] leading-snug text-petrol-700">
+          <Icon name="calendar" className="size-3.5 shrink-0 text-petrol-700" />
+          <p className="min-w-0 flex-1 text-[11px] leading-snug text-petrol-900">
             <span className="font-medium">
               {t('spine.highlightActive', {
                 date: formatFullDate(highlightDate, locale),
               })}
             </span>
-            <span className="text-petrol-600">
+            <span className="text-petrol-700">
               {' · '}
               {highlightedCount === 0
                 ? t('spine.highlightNone')

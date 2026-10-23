@@ -29,7 +29,7 @@ function tintFor(publicId: string): string {
 }
 
 export default function Avatar({ user, size = 'xs', tone = 'default' }: AvatarProps) {
-  const sizeClass = size === 'xs' ? 'size-6 text-[10px]' : 'size-8 text-xs';
+  const sizeClass = size === 'xs' ? 'size-6 text-[11px]' : 'size-8 text-xs';
   const ringClass = tone === 'inverse' ? 'ring-nav-surface' : 'ring-paper-50';
 
   return (

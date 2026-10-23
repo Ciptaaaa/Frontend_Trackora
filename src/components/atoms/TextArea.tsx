@@ -28,7 +28,7 @@ export default function TextArea({
       <textarea
         id={fieldId}
         rows={rows}
-        className={`w-full resize-y rounded-lg bg-paper-100 px-3 py-2 text-sm leading-relaxed text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:bg-paper-50 focus:bg-paper-50 ${className}`}
+        className={`w-full resize-y rounded-lg bg-paper-50 px-3 py-2 text-sm leading-relaxed text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:ring-paper-400 focus:bg-paper-50 focus:ring-petrol-400 dark:ring-paper-400 ${className}`}
         {...rest}
       />
     </div>

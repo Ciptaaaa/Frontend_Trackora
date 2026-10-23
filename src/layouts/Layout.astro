@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = 'Trackora',
-  description = 'Papan kerja pribadi — lacak apa yang sedang jalan dan kapan jatuh temponya.',
+  description = 'Papan kerja pribadi, lacak apa yang sedang jalan dan kapan jatuh temponya.',
 } = Astro.props;
 ---
 
@@ -20,13 +20,27 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap"
-    />
+    <meta name="google-site-verification" content="nuRkMXFMe9W2MTwUlRI-NYn4y6XaVvu6sRYNvYCtZ5s" />
+    <meta name="theme-color" content="#f7f7f5" />
+    <script is:inline>
+      (() => {
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (!meta) return;
+        const sync = () => {
+          meta.setAttribute(
+            'content',
+            document.documentElement.classList.contains('dark')
+              ? '#191919'
+              : '#f7f7f5',
+          );
+        };
+        new MutationObserver(sync).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class'],
+        });
+        sync();
+      })();
+    </script>
 
     <title>{title}</title>
     <script is:inline>

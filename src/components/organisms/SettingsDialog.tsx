@@ -97,7 +97,7 @@ export default function SettingsDialog({
     >
       <div className="space-y-5">
         <section className="space-y-3">
-          <h3 className="text-[10px] font-semibold tracking-[0.08em] text-ink-400 uppercase">
+          <h3 className="text-xs font-medium text-ink-400">
             {t('settings.profile')}
           </h3>
 
@@ -139,8 +139,8 @@ export default function SettingsDialog({
           )}
         </section>
 
-        <section className="space-y-3 border-t border-paper-300/60 pt-4">
-          <h3 className="text-[10px] font-semibold tracking-[0.08em] text-ink-400 uppercase">
+        <section className="space-y-3 border-t border-paper-300 pt-4">
+          <h3 className="text-xs font-medium text-ink-400">
             {t('settings.appearance')}
           </h3>
 
@@ -154,7 +154,7 @@ export default function SettingsDialog({
             <div
               role="group"
               aria-label={t('locale.label')}
-              className="inline-flex items-center gap-0.5 rounded-lg bg-paper-100 p-0.5 ring-1 ring-paper-300 ring-inset"
+              className="inline-flex items-center gap-0.5 rounded-lg bg-paper-100 p-0.5 ring-1 ring-paper-300 ring-inset dark:ring-paper-400"
             >
               {LOCALES.map((entry) => {
                 const active = entry.code === locale;
@@ -165,9 +165,9 @@ export default function SettingsDialog({
                     onClick={() => setLocale(entry.code)}
                     aria-pressed={active}
                     title={entry.label}
-                    className={`inline-flex h-7 items-center rounded-md px-2 font-mono text-[11px] font-semibold transition-colors ${
+                    className={`inline-flex h-8 items-center rounded-md px-2 text-[11px] font-semibold transition-colors md:h-7 ${
                       active
-                        ? 'bg-paper-50 text-petrol-600 shadow-sm'
+                        ? 'bg-paper-50 text-petrol-700 shadow-sm'
                         : 'text-ink-400 hover:text-ink-800'
                     }`}
                   >
@@ -180,8 +180,8 @@ export default function SettingsDialog({
           </div>
         </section>
 
-        <section className="space-y-3 border-t border-paper-300/60 pt-4">
-          <h3 className="text-[10px] font-semibold tracking-[0.08em] text-ink-400 uppercase">
+        <section className="space-y-3 border-t border-paper-300 pt-4">
+          <h3 className="text-xs font-medium text-ink-400">
             {t('settings.session')}
           </h3>
 

@@ -136,7 +136,7 @@ export default function LabelManager({
     <Modal open={open} title={t('label.manage')} onClose={onClose}>
       <div className="space-y-5">
         <section>
-          <h3 className="mb-2 text-[11px] font-semibold tracking-wide text-ink-400 uppercase">
+          <h3 className="mb-2 text-xs font-medium text-ink-400">
             {t('label.title')}
           </h3>
 
@@ -145,7 +145,7 @@ export default function LabelManager({
               <Spinner label={t('app.loading')} size="sm" />
             </div>
           ) : labels.length === 0 ? (
-            <p className="rounded-lg border border-dashed border-paper-300 px-3 py-5 text-center text-[11px] leading-relaxed text-ink-400">
+            <p className="rounded-lg border border-dashed border-paper-400/60 px-3 py-5 text-center text-[11px] leading-relaxed text-ink-400">
               {t('label.empty')}
             </p>
           ) : (
@@ -153,9 +153,9 @@ export default function LabelManager({
               {labels.map((label) => (
                 <li
                   key={label.public_id}
-                  className={`flex items-center gap-2.5 rounded-lg px-2 py-1.5 transition-colors ${
+                  className={`flex min-h-9 items-center gap-2.5 rounded-lg px-2 py-1.5 transition-colors ${
                     editingId === label.public_id
-                      ? 'bg-petrol-50 ring-1 ring-petrol-400'
+                      ? 'bg-petrol-50 ring-1 ring-petrol-200'
                       : 'hover:bg-paper-100'
                   }`}
                 >
@@ -187,8 +187,8 @@ export default function LabelManager({
           )}
         </section>
 
-        <section className="border-t border-paper-300/60 pt-4">
-          <h3 className="mb-2 text-[11px] font-semibold tracking-wide text-ink-400 uppercase">
+        <section className="border-t border-paper-300 pt-4">
+          <h3 className="mb-2 text-xs font-medium text-ink-400">
             {editingId === null ? t('label.new') : t('label.title')}
           </h3>
 

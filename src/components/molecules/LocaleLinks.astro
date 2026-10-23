@@ -11,7 +11,7 @@ const { current, tone = 'ink' } = Astro.props;
 
 const inkTone = {
   idle: 'text-ink-400 hover:bg-paper-200 hover:text-ink-900',
-  active: 'bg-paper-200 text-ink-900',
+  active: 'bg-paper-50 text-petrol-700 ring-1 ring-paper-300 dark:ring-paper-400',
 };
 
 const navTone = {
@@ -32,12 +32,12 @@ const palette = tone === 'nav' ? navTone : inkTone;
         data-locale={entry.code}
         aria-current={entry.code === current ? 'true' : undefined}
         class:list={[
-          'rounded-lg px-2.5 py-1.5 font-mono text-[11px] tracking-[0.08em] transition-colors',
+          'inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg px-2.5 text-[11px] font-semibold tracking-[0.02em] transition-colors',
           entry.code === current ? palette.active : palette.idle,
         ]}
       >
         {entry.short}
-        <span class="sr-only"> — {entry.label}</span>
+        <span class="sr-only"> · {entry.label}</span>
       </a>
     ))
   }

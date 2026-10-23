@@ -117,7 +117,7 @@ export default function CommentThread({ cardPublicId }: CommentThreadProps) {
         </ul>
       )}
 
-      <div className="rounded-lg bg-paper-100 p-2 ring-1 ring-paper-300">
+      <div className="rounded-lg bg-paper-50 p-2 ring-1 ring-paper-300 focus-within:ring-petrol-400 dark:ring-paper-400">
         <textarea
           rows={2}
           value={draft}

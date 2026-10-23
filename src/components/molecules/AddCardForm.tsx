@@ -69,7 +69,7 @@ export default function AddCardForm({
       <button
         type="button"
         onClick={() => onOpenChange(true)}
-        className="flex h-9 w-full items-center gap-1.5 rounded-lg px-2.5 text-xs font-medium text-ink-400 transition-colors hover:bg-paper-200 hover:text-ink-800"
+        className="flex min-h-11 w-full items-center gap-1.5 rounded-lg px-2.5 text-xs font-medium text-ink-400 transition-colors hover:bg-paper-100 hover:text-ink-800"
       >
         <Icon name="plus" className="size-3.5" />
         {t('column.addCard')}
@@ -78,7 +78,7 @@ export default function AddCardForm({
   }
 
   return (
-    <div className="rounded-lg bg-paper-50 p-2 ring-1 ring-paper-300">
+    <div className="rounded-xl bg-paper-50 p-2.5 shadow-sm ring-1 ring-paper-300 dark:ring-paper-400">
       <textarea
         ref={titleRef}
         rows={2}
@@ -111,7 +111,7 @@ export default function AddCardForm({
               onKeyDown={(event) => {
                 if (event.key === 'Escape') close();
               }}
-              className="w-full resize-none rounded-md bg-paper-100 px-2 py-1.5 text-[13px] leading-relaxed text-ink-800 placeholder:text-ink-400 focus:outline-none"
+              className="w-full resize-none rounded-md bg-paper-100 px-2 py-1.5 text-[13px] leading-relaxed text-ink-800 ring-1 ring-paper-300 ring-inset placeholder:text-ink-400 focus:bg-paper-50 focus:outline-none dark:ring-paper-400"
             />
           </label>
 
@@ -135,7 +135,7 @@ export default function AddCardForm({
                     }
                     if (event.key === 'Escape') close();
                   }}
-                  className="min-w-0 flex-1 rounded-md bg-paper-100 px-2 py-1.5 font-mono text-[12px] text-ink-800 focus:outline-none"
+                  className="min-w-0 flex-1 rounded-md bg-paper-100 px-2 py-1.5 text-[12px] text-ink-800 ring-1 ring-paper-300 ring-inset focus:bg-paper-50 focus:outline-none dark:ring-paper-400"
                 />
                 {dueDate !== '' && (
                   <button

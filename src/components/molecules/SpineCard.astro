@@ -22,7 +22,7 @@ const columnClass: Record<SpineCard['startDay'], string> = {
   class:list={[
     'col-span-1 sm:col-span-2',
     columnClass[card.startDay],
-    'rounded-xl bg-paper-50 p-3 shadow-sm ring-1 ring-paper-300',
+    'rounded-lg bg-paper-50 p-3 shadow-sm ring-1 ring-paper-300 transition-shadow hover:shadow-md dark:ring-paper-400/70',
   ]}
 >
   <p class="text-[13px] leading-snug font-medium text-ink-800">

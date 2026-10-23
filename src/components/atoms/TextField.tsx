@@ -31,8 +31,8 @@ export default function TextField({
         readOnly={readonly}
         className={`w-full rounded-lg px-3 py-2 text-sm ring-1 ring-inset transition placeholder:text-ink-400 ${
           readonly
-            ? 'bg-paper-300 text-ink-500 ring-paper-300 cursor-not-allowed select-text'
-            : 'bg-paper-100 text-ink-900 ring-paper-300 hover:bg-paper-50 focus:bg-paper-50'
+            ? 'cursor-not-allowed bg-paper-100 text-ink-400 ring-paper-300 select-text'
+            : 'bg-paper-50 text-ink-900 ring-paper-300 hover:ring-paper-400 focus:bg-paper-50 focus:ring-petrol-400 dark:ring-paper-400'
         } ${className}`}
         {...rest}
       />

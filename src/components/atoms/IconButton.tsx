@@ -24,7 +24,7 @@ export default function IconButton({
       type="button"
       aria-label={label}
       title={label}
-      className={`inline-flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors duration-150 ${toneClass} ${className}`}
+      className={`inline-flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors duration-150 max-md:min-h-11 max-md:min-w-11 ${toneClass} ${className}`}
       {...rest}
     >
       <Icon name={icon} />

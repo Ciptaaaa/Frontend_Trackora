@@ -9,7 +9,7 @@ export default function LabelChip({ label, compact = false }: LabelChipProps) {
   if (compact) {
     return (
       <span
-        className="block h-1 w-6 rounded-full"
+        className="block h-1.5 w-5 rounded-full"
         style={{ backgroundColor: label.color }}
         title={label.name}
       >

@@ -10,7 +10,6 @@ import MobileIsland from '../organisms/MobileIsland';
 import SettingsDialog from '../organisms/SettingsDialog';
 import AddListForm from '../molecules/AddListForm';
 import type { NewCardDraft } from '../molecules/AddCardForm';
-import ThemeToggle from '../molecules/ThemeToggle';
 import Button from '../atoms/Button';
 import Icon from '../atoms/Icon';
 import Spinner from '../atoms/Spinner';
@@ -420,7 +419,7 @@ export default function AppShell({
   }
 
   return (
-    <div className="flex h-dvh overflow-hidden bg-paper-200 text-ink-800">
+    <div className="flex h-dvh overflow-hidden bg-paper-100 text-ink-800">
       <div className="hidden shrink-0 md:block lg:hidden">
         <Sidebar
           variant="rail"
@@ -435,7 +434,7 @@ export default function AppShell({
       {railExpanded && (
         <div className="fixed inset-0 z-50 hidden md:block lg:hidden">
           <div
-            className="absolute inset-0 bg-scrim backdrop-blur-[2px]"
+            className="absolute inset-0 bg-scrim"
             onClick={closeNav}
             aria-hidden="true"
           />
@@ -455,11 +454,11 @@ export default function AppShell({
       {drawerOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div
-            className="absolute inset-0 bg-scrim backdrop-blur-[2px]"
+            className="absolute inset-0 bg-scrim"
             onClick={closeNav}
             aria-hidden="true"
           />
-          <div className="relative flex h-full w-64 max-w-[82vw] flex-col shadow-2xl">
+          <div className="relative flex h-full w-72 max-w-[86vw] flex-col shadow-2xl">
             <Sidebar
               variant="drawer"
               {...sidebarProps}
@@ -469,12 +468,6 @@ export default function AppShell({
               }}
               onClose={closeNav}
             />
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 border-t border-nav-border bg-nav-surface px-3 py-3">
-              <span className="text-[11px] font-medium text-nav-muted">
-                {t('theme.label')}
-              </span>
-              <ThemeToggle preference={theme} onChange={onThemeChange} tone="inverse" />
-            </div>
           </div>
         </div>
       )}
@@ -497,14 +490,14 @@ export default function AppShell({
           onEditBoard={activeBoard === null ? null : () => setBoardDialog(activeBoard)}
           onManageLabels={() => setLabelManagerOpen(true)}
         />
-        <div className="border-b border-paper-300/60 bg-paper-50 px-3 py-2 sm:hidden">
+        <div className="border-b border-paper-300 bg-paper-50 px-3 py-2 sm:hidden">
           <input
             type="search"
             value={query}
             placeholder={t('board.searchCards')}
             aria-label={t('board.searchCards')}
             onChange={(event) => setQuery(event.target.value)}
-            className="h-9 w-full rounded-lg bg-paper-100 px-3 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset placeholder:text-ink-400"
+            className="h-11 w-full rounded-lg bg-paper-100 px-3 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset placeholder:text-ink-400 focus:bg-paper-50 focus:ring-petrol-400 dark:ring-paper-400"
           />
         </div>
 
@@ -525,7 +518,7 @@ export default function AppShell({
           onHighlightDate={setHighlightDate}
         />
         {view !== 'all' && (
-          <div className="flex items-center gap-2 border-b border-petrol-200 bg-petrol-50 px-3 py-2 sm:px-4">
+          <div className="flex items-center gap-2 border-b border-petrol-200 bg-petrol-50 px-3 py-2 sm:px-5">
             <Icon
               name={view === 'due' ? 'calendar' : 'alert'}
               className="size-3.5 shrink-0 text-petrol-700"
@@ -577,8 +570,8 @@ export default function AppShell({
             </Button>
           </div>
         ) : (
-          <main className="min-h-0 flex-1 overflow-x-auto overflow-y-hidden overscroll-x-none scrollbar-slim">
-            <div className="grid h-full w-max auto-cols-70 grid-flow-col gap-3 px-3 pt-3 pb-20 sm:px-4 sm:pt-4 md:pb-4 lg:auto-cols-74">
+          <main className="min-h-0 flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden overscroll-x-none scroll-px-3 scrollbar-slim">
+            <div className="grid h-full w-max auto-cols-[minmax(272px,85vw)] grid-flow-col gap-3 px-3 pt-3 pb-24 sm:auto-cols-[272px] sm:px-4 sm:pt-4 md:pb-4 lg:auto-cols-[296px]">
               {boardLists.map((list, index) => (
                 <BoardColumn
                   key={list.public_id}

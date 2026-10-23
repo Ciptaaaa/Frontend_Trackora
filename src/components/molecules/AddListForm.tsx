@@ -37,7 +37,7 @@ export default function AddListForm({ onSubmit }: AddListFormProps) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex h-full min-h-24 w-full flex-col items-center justify-center gap-1.5 rounded-xl border border-dashed border-paper-300 text-xs font-medium text-ink-400 transition-colors hover:border-petrol-400 hover:bg-paper-100 hover:text-ink-800"
+        className="flex h-full min-h-24 w-full flex-col items-center justify-center gap-1.5 rounded-xl border border-dashed border-paper-400/70 text-xs font-medium text-ink-400 transition-colors hover:border-petrol-400 hover:bg-paper-100/70 hover:text-ink-800"
       >
         <Icon name="plus" className="size-4" />
         {t('list.add')}
@@ -46,7 +46,7 @@ export default function AddListForm({ onSubmit }: AddListFormProps) {
   }
 
   return (
-    <div className="flex h-fit flex-col rounded-xl bg-paper-100 p-2 ring-1 ring-paper-300/60">
+    <div className="flex h-fit flex-col rounded-xl bg-paper-200 p-2 ring-1 ring-paper-300 dark:ring-paper-400">
       <input
         ref={inputRef}
         value={title}
@@ -60,7 +60,7 @@ export default function AddListForm({ onSubmit }: AddListFormProps) {
           }
           if (event.key === 'Escape') cancel();
         }}
-        className="w-full rounded-lg bg-paper-50 px-2.5 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 focus:ring-petrol-400"
+        className="w-full rounded-lg bg-paper-50 px-2.5 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 focus:ring-petrol-400 dark:ring-paper-400"
       />
       <div className="mt-1.5 flex items-center gap-1.5">
         <Button size="sm" onClick={commit}>

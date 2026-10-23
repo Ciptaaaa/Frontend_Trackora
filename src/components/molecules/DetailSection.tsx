@@ -13,7 +13,7 @@ export default function DetailSection({
   return (
     <section>
       <div className="mb-2 flex min-h-6 items-center gap-2">
-        <h3 className="flex-1 text-[11px] font-semibold tracking-wide text-ink-400 uppercase">
+        <h3 className="flex-1 text-xs font-medium text-ink-400">
           {title}
         </h3>
         {action}

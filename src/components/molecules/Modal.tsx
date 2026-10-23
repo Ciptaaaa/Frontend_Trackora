@@ -52,7 +52,7 @@ export default function Modal({
   return (
     <div className="fixed inset-0 z-60 flex items-end justify-center sm:items-center sm:p-6">
       <div
-        className="absolute inset-0 bg-scrim backdrop-blur-[2px]"
+        className="absolute inset-0 bg-scrim"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -61,16 +61,16 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className={`relative flex max-h-[90dvh] w-full flex-col rounded-t-2xl bg-paper-50 shadow-2xl sm:max-h-[82dvh] sm:rounded-2xl ${WIDTHS[size]}`}
+        className={`relative flex max-h-[92dvh] w-full flex-col rounded-t-2xl bg-paper-50 shadow-2xl sm:max-h-[84dvh] sm:rounded-2xl ${WIDTHS[size]}`}
       >
         <span
           className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-paper-300 sm:hidden"
           aria-hidden="true"
         />
 
-        <header className="flex shrink-0 items-start gap-3 border-b border-paper-300/60 px-5 py-4">
+        <header className="flex shrink-0 items-start gap-3 border-b border-paper-300 px-5 py-4">
           <div className="min-w-0 flex-1">
-            <h2 className="truncate font-display text-base leading-snug font-semibold text-ink-900">
+            <h2 className="truncate text-base leading-snug font-semibold tracking-[-0.01em] text-ink-900">
               {title}
             </h2>
             {hint !== undefined && (
@@ -85,7 +85,7 @@ export default function Modal({
         </div>
 
         {footer !== undefined && (
-          <footer className="flex shrink-0 items-center justify-end gap-2 border-t border-paper-300/60 px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-3">
+          <footer className="flex shrink-0 items-center justify-end gap-2 border-t border-paper-300 px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-3">
             {footer}
           </footer>
         )}

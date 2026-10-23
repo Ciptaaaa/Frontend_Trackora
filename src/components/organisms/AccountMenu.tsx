@@ -67,12 +67,12 @@ export default function AccountMenu({
         <div
           role="menu"
           aria-label={t('account.menu')}
-          className={`absolute z-50 w-64 overflow-hidden rounded-xl bg-paper-50 shadow-lg ring-1 ring-paper-300 ${position}`}
+          className={`absolute z-50 w-64 overflow-hidden rounded-xl bg-paper-50 shadow-xl ring-1 ring-paper-300 dark:ring-paper-400 ${position}`}
         >
-          <div className="flex items-center gap-2.5 border-b border-paper-300/60 px-3 py-3">
+          <div className="flex items-center gap-2.5 border-b border-paper-300 px-3 py-3">
             <Avatar user={user} size="sm" />
             <span className="min-w-0 flex-1">
-              <span className="block text-[10px] font-semibold tracking-[0.08em] text-ink-400 uppercase">
+              <span className="block text-[11px] font-medium text-ink-400">
                 {t('account.signedInAs')}
               </span>
               <span className="block truncate text-sm font-medium text-ink-900">
@@ -92,13 +92,13 @@ export default function AccountMenu({
                 onOpenSettings();
                 setOpen(false);
               }}
-              className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-ink-600 transition-colors hover:bg-paper-100 hover:text-ink-900"
+              className="flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-ink-600 transition-colors hover:bg-paper-100 hover:text-ink-900 max-md:min-h-11"
             >
               <Icon name="settings" className="size-4 shrink-0" />
               {t('account.settings')}
             </button>
           </div>
-          <div className="space-y-2.5 border-t border-paper-300/60 px-3 py-2.5">
+          <div className="space-y-2.5 border-t border-paper-300 px-3 py-2.5">
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs text-ink-600">{t('theme.label')}</span>
               <ThemeToggle preference={theme} onChange={onThemeChange} />
@@ -109,7 +109,7 @@ export default function AccountMenu({
               <div
                 role="group"
                 aria-label={t('locale.label')}
-                className="inline-flex items-center gap-0.5 rounded-lg bg-paper-100 p-0.5 ring-1 ring-paper-300 ring-inset"
+                className="inline-flex items-center gap-0.5 rounded-lg bg-paper-100 p-0.5 ring-1 ring-paper-300 ring-inset dark:ring-paper-400"
               >
                 {LOCALES.map((entry) => {
                   const active = entry.code === locale;
@@ -120,9 +120,9 @@ export default function AccountMenu({
                       onClick={() => setLocale(entry.code)}
                       aria-pressed={active}
                       title={entry.label}
-                      className={`inline-flex h-7 items-center rounded-md px-2 font-mono text-[11px] font-semibold transition-colors ${
+                      className={`inline-flex h-8 items-center rounded-md px-2 text-[11px] font-semibold transition-colors md:h-7 ${
                         active
-                          ? 'bg-paper-50 text-petrol-600 shadow-sm'
+                          ? 'bg-paper-50 text-petrol-700 shadow-sm'
                           : 'text-ink-400 hover:text-ink-800'
                       }`}
                     >
@@ -134,7 +134,7 @@ export default function AccountMenu({
               </div>
             </div>
           </div>
-          <div className="border-t border-paper-300/60 p-1">
+          <div className="border-t border-paper-300 p-1">
             <button
               type="button"
               role="menuitem"
@@ -142,7 +142,7 @@ export default function AccountMenu({
                 setOpen(false);
                 onLogout();
               }}
-              className="flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-berry-500 transition-colors hover:bg-berry-100"
+              className="flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm text-berry-500 transition-colors hover:bg-berry-100 max-md:min-h-11"
             >
               <Icon name="chevron-left" className="size-4 shrink-0" />
               {t('nav.logout')}

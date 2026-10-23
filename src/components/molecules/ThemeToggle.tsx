@@ -31,7 +31,7 @@ export default function ThemeToggle({
       role="group"
       aria-label={t('theme.label')}
       className={`inline-flex items-center gap-0.5 rounded-lg p-0.5 ring-1 ring-inset ${
-        inverse ? 'bg-nav-surface ring-nav-border' : 'bg-paper-100 ring-paper-300'
+        inverse ? 'bg-nav-surface ring-nav-border' : 'bg-paper-100 ring-paper-300 dark:ring-paper-400'
       }`}
     >
       {OPTIONS.map((option) => {
@@ -43,11 +43,11 @@ export default function ThemeToggle({
             onClick={() => onChange(option.value)}
             aria-pressed={active}
             title={t(option.labelKey)}
-            className={`inline-flex size-7 items-center justify-center rounded-md transition-colors ${
+            className={`inline-flex size-8 items-center justify-center rounded-md transition-colors max-md:min-h-11 max-md:min-w-11 md:size-7 ${
               active
                 ? inverse
-                  ? 'bg-nav-accent text-nav-text'
-                  : 'bg-paper-50 text-petrol-600 shadow-sm'
+                  ? 'bg-nav-raised text-nav-text'
+                  : 'bg-paper-50 text-petrol-700 shadow-sm ring-1 ring-paper-300 dark:ring-paper-400'
                 : inverse
                   ? 'text-nav-muted hover:text-nav-text'
                   : 'text-ink-400 hover:text-ink-800'

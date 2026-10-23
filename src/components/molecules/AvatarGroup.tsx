@@ -18,7 +18,7 @@ export default function AvatarGroup({ users, max = 3 }: AvatarGroupProps) {
         <Avatar key={user.public_id} user={user} />
       ))}
       {overflow > 0 && (
-        <span className="inline-flex size-6 items-center justify-center rounded-full bg-paper-300 text-[10px] font-semibold text-ink-600 ring-2 ring-paper-50">
+        <span className="inline-flex size-6 items-center justify-center rounded-full bg-paper-300 text-[11px] font-semibold text-ink-600 ring-2 ring-paper-50">
           +{overflow}
         </span>
       )}

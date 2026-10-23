@@ -58,10 +58,14 @@ export default function Sidebar({
   return (
     <nav
       aria-label={t('nav.main')}
-      className={`flex h-full flex-col bg-nav-surface ${compact ? 'w-16 items-center' : 'w-64'}`}
+      className={`flex h-full flex-col border-r border-nav-border bg-nav-surface text-nav-text ${
+        compact ? 'w-16 items-center' : 'w-64'
+      }`}
     >
       <div
-        className={`flex h-14 shrink-0 items-center ${compact ? 'justify-center' : 'justify-between px-4'}`}
+        className={`flex h-14 shrink-0 items-center ${
+          compact ? 'justify-center' : 'justify-between px-3'
+        }`}
       >
         {compact && onExpand !== undefined ? (
           <button
@@ -69,7 +73,7 @@ export default function Sidebar({
             onClick={onExpand}
             aria-label={t('nav.expand')}
             title={t('nav.expand')}
-            className="rounded-lg p-1 transition-colors hover:bg-nav-raised"
+            className="rounded-lg p-1.5 transition-colors hover:bg-nav-raised"
           >
             <Logo markOnly tone="inverse" />
           </button>
@@ -81,13 +85,12 @@ export default function Sidebar({
           <IconButton
             icon="close"
             label={t('nav.closeMenu')}
-            tone="inverse"
             onClick={onClose}
           />
         )}
       </div>
 
-      <div className={`flex w-full flex-col gap-0.5 ${compact ? 'px-2' : 'px-3'}`}>
+      <div className={`flex w-full flex-col gap-0.5 ${compact ? 'px-2' : 'px-2'}`}>
         <NavItem
           icon="board"
           label={t('nav.board')}
@@ -114,7 +117,7 @@ export default function Sidebar({
       </div>
 
       {compact ? (
-        <div className="mt-5 flex w-full flex-col items-center gap-2 border-t border-nav-border pt-4">
+        <div className="mt-5 flex w-full flex-col items-center gap-1.5 border-t border-nav-border pt-4">
           {boards.map((board) => {
             const active = board.public_id === activeBoardId;
             return (
@@ -125,9 +128,9 @@ export default function Sidebar({
                 title={board.title}
                 aria-label={board.title}
                 aria-current={active ? 'true' : undefined}
-                className={`flex size-9 items-center justify-center rounded-lg font-display text-xs font-semibold transition-colors ${
+                className={`flex size-9 items-center justify-center rounded-lg text-xs font-semibold transition-colors max-md:size-11 ${
                   active
-                    ? 'bg-nav-accent text-nav-text'
+                    ? 'bg-petrol-50 text-petrol-700 ring-1 ring-petrol-200'
                     : 'text-nav-muted hover:bg-nav-raised hover:text-nav-text'
                 }`}
               >
@@ -140,53 +143,61 @@ export default function Sidebar({
             onClick={onNewBoard}
             title={t('board.new')}
             aria-label={t('board.new')}
-            className="flex size-9 items-center justify-center rounded-lg border border-dashed border-nav-border text-nav-muted transition-colors hover:bg-nav-raised hover:text-nav-text"
+            className="flex size-9 items-center justify-center rounded-lg border border-dashed border-nav-border text-nav-muted transition-colors hover:bg-nav-raised hover:text-nav-text max-md:size-11"
           >
             <Icon name="plus" className="size-4" />
           </button>
         </div>
       ) : (
-        <div className="mt-6 min-h-0 w-full flex-1 overflow-y-auto px-3 scrollbar-slim">
-          <div className="mb-2 flex items-center justify-between gap-2 pr-0.5 pl-2.5">
-            <h2 className="text-[10px] font-semibold tracking-[0.08em] text-nav-muted uppercase">
+        <div className="mt-5 flex min-h-0 w-full flex-1 flex-col px-2">
+          <div className="mb-1 flex items-center justify-between gap-2 pr-0.5 pl-2">
+            <h2 className="text-[11px] font-medium text-nav-muted">
               {t('nav.myBoards')}
             </h2>
             <IconButton
               icon="plus"
               label={t('board.new')}
-              tone="inverse"
               onClick={onNewBoard}
               className="size-7"
             />
           </div>
-          <ul className="flex flex-col gap-0.5">
-            {boards.map((board) => (
-              <li key={board.public_id}>
-                <button
-                  type="button"
-                  onClick={() => onSelectBoard(board.public_id)}
-                  aria-current={board.public_id === activeBoardId ? 'true' : undefined}
-                  className={`flex h-9 w-full items-center gap-2.5 rounded-lg px-2.5 text-left text-[13px] transition-colors ${
-                    board.public_id === activeBoardId
-                      ? 'bg-nav-raised font-medium text-nav-text'
-                      : 'text-nav-muted hover:bg-nav-raised/60 hover:text-nav-text'
-                  }`}
-                >
-                  <span
-                    className="size-1.5 shrink-0 rounded-full bg-saffron-400"
-                    aria-hidden="true"
-                  />
-                  <span className="truncate">{board.title}</span>
-                </button>
-              </li>
-            ))}
+          <ul className="flex flex-col gap-0.5 overflow-y-auto scrollbar-slim">
+            {boards.map((board) => {
+              const active = board.public_id === activeBoardId;
+              return (
+                <li key={board.public_id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelectBoard(board.public_id)}
+                    aria-current={active ? 'true' : undefined}
+                    className={`flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-left text-[13px] transition-colors max-md:min-h-11 ${
+                      active
+                        ? 'bg-petrol-50 font-medium text-petrol-700'
+                        : 'text-nav-muted hover:bg-nav-raised hover:text-nav-text'
+                    }`}
+                  >
+                    <span
+                      className={`flex size-5 shrink-0 items-center justify-center rounded-[5px] text-[11px] font-semibold ${
+                        active
+                          ? 'bg-petrol-600 text-onaccent'
+                          : 'bg-black/5 text-nav-muted dark:bg-white/10'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {board.title.charAt(0).toUpperCase()}
+                    </span>
+                    <span className="truncate">{board.title}</span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
 
       <div
-        className={`mt-auto flex w-full shrink-0 flex-col gap-1 border-t border-nav-border py-3 ${
-          compact ? 'items-center px-2' : 'px-3'
+        className={`mt-auto flex w-full shrink-0 flex-col gap-0.5 border-t border-nav-border py-2.5 ${
+          compact ? 'items-center px-2' : 'px-2'
         }`}
       >
         <NavItem
@@ -203,8 +214,8 @@ export default function Sidebar({
           tone="inverse"
           triggerClassName={
             compact
-              ? 'rounded-lg p-0.5'
-              : 'mt-1 w-full rounded-lg px-2 py-1.5 text-left'
+              ? 'rounded-lg p-1'
+              : 'mt-1 w-full rounded-lg px-2 py-1.5 text-left hover:bg-nav-raised'
           }
           onThemeChange={onThemeChange}
           onOpenSettings={onOpenSettings}
@@ -219,7 +230,7 @@ export default function Sidebar({
                 <span className="block truncate text-xs font-medium text-nav-text">
                   {user.name}
                 </span>
-                <span className="block truncate text-[10px] text-nav-muted">
+                <span className="block truncate text-[11px] text-nav-muted">
                   {user.email}
                 </span>
               </span>

@@ -52,7 +52,7 @@ export default function MobileIsland({
       aria-label={t('island.label')}
       className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden"
     >
-      <div className="pointer-events-auto flex items-center gap-1 rounded-full bg-nav-surface/95 p-1.5 shadow-2xl ring-1 ring-nav-border backdrop-blur-md">
+      <div className="pointer-events-auto flex items-center gap-1 rounded-full border border-paper-300 bg-paper-50/95 p-1.5 shadow-xl shadow-black/10 backdrop-blur-md dark:border-paper-400">
         {SEGMENTS.map((segment) => {
           const active = segment.view === view;
           const count = countFor(segment.view);
@@ -64,8 +64,8 @@ export default function MobileIsland({
               aria-current={active ? 'page' : undefined}
               className={`relative flex h-11 items-center gap-1.5 rounded-full px-3.5 transition-colors ${
                 active
-                  ? 'bg-nav-accent text-nav-text'
-                  : 'text-nav-muted hover:text-nav-text'
+                  ? 'bg-petrol-600 text-onaccent shadow-sm shadow-petrol-600/20'
+                  : 'text-ink-400 hover:bg-paper-100 hover:text-ink-900'
               }`}
             >
               <Icon name={segment.icon} className="size-4 shrink-0" />
@@ -77,7 +77,7 @@ export default function MobileIsland({
               {!active && (
                 <>
                   {count > 0 && (
-                    <span className="absolute top-1 right-2 flex size-4 items-center justify-center rounded-full bg-saffron-600 font-mono text-[9px] font-semibold text-onaccent tabular-nums">
+                    <span className="absolute top-1 right-2 flex size-4 items-center justify-center rounded-full bg-berry-500 text-[10px] font-semibold text-onaccent tabular-nums">
                       {count > 9 ? '9+' : count}
                     </span>
                   )}
@@ -88,20 +88,19 @@ export default function MobileIsland({
           );
         })}
 
-        <span className="mx-0.5 h-6 w-px bg-nav-border" aria-hidden="true" />
+        <span className="mx-0.5 h-6 w-px bg-paper-300" aria-hidden="true" />
 
         <AccountMenu
           user={user}
           theme={theme}
           placement="up"
           align="end"
-          tone="inverse"
-          triggerClassName="rounded-full p-0.5"
+          triggerClassName="flex min-h-11 min-w-11 items-center justify-center rounded-full p-1 hover:bg-paper-100"
           onThemeChange={onThemeChange}
           onOpenSettings={onOpenSettings}
           onLogout={onLogout}
         >
-          <Avatar user={user} size="sm" tone="inverse" />
+          <Avatar user={user} size="sm" />
         </AccountMenu>
       </div>
     </nav>

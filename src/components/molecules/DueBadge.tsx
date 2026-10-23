@@ -21,7 +21,7 @@ export default function DueBadge({ dueDate }: DueBadgeProps) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 font-mono text-[10px] tracking-tight tabular-nums ${TONES[state]}`}
+      className={`inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium tracking-tight tabular-nums ${TONES[state]}`}
     >
       {state === 'overdue' && <Icon name="alert" className="size-3" />}
       {formatDueLabel(dueDate, locale, t)}

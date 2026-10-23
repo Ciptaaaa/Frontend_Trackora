@@ -375,7 +375,7 @@ export const en: Dictionary = {
   'auth.toRegister': 'Sign up',
   'auth.testMode': 'Test mode.',
   'auth.testModeBody':
-    'The session lives in an HttpOnly cookie that JavaScript cannot read. For testing only — do not use a real password.',
+    'The session lives in an HttpOnly cookie that JavaScript cannot read. For testing only, do not use a real password.',
   'auth.heroLine': 'See when your work piles up.',
   'auth.heroBody':
     'An ordinary board tells you what is in flight. Trackora puts the next seven days above the board, so you know which day gets heavy before it arrives.',

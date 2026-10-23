@@ -238,7 +238,7 @@ export default function CardDetail({
     <>
       <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-stretch sm:justify-end">
         <div
-          className="absolute inset-0 bg-scrim backdrop-blur-[2px]"
+          className="absolute inset-0 bg-scrim"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -247,16 +247,16 @@ export default function CardDetail({
           role="dialog"
           aria-modal="true"
           aria-label={card.title}
-          className="relative flex max-h-[88dvh] w-full flex-col rounded-t-2xl bg-paper-50 shadow-2xl sm:h-full sm:max-h-none sm:w-full sm:max-w-md sm:rounded-none"
+          className="relative flex max-h-[92dvh] w-full flex-col rounded-t-2xl bg-paper-50 shadow-2xl sm:h-full sm:max-h-none sm:w-full sm:max-w-lg sm:rounded-none"
         >
           <span
             className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-paper-300 sm:hidden"
             aria-hidden="true"
           />
 
-          <header className="flex shrink-0 items-start gap-3 border-b border-paper-300/60 px-5 py-4">
+          <header className="flex shrink-0 items-start gap-3 border-b border-paper-300 px-5 py-4">
             <div className="min-w-0 flex-1">
-              <span className="font-mono text-[10px] tracking-wide text-ink-400 uppercase">
+              <span className="text-[11px] font-medium text-ink-400">
                 {list?.title ?? t('detail.noList')}
               </span>
               {editing ? (
@@ -266,10 +266,10 @@ export default function CardDetail({
                   value={title}
                   disabled={saving}
                   onChange={(event) => setTitle(event.target.value)}
-                  className="mt-1 font-display text-lg font-semibold"
+                  className="mt-1 text-lg font-semibold"
                 />
               ) : (
-                <h2 className="mt-1 font-display text-lg leading-snug font-semibold text-ink-900">
+                <h2 className="mt-1 text-xl leading-snug font-semibold tracking-[-0.02em] text-ink-900">
                   {card.title}
                 </h2>
               )}
@@ -304,7 +304,7 @@ export default function CardDetail({
                   value={dueDate}
                   disabled={saving}
                   onChange={(event) => setDueDate(event.target.value)}
-                  className="w-full rounded-lg bg-paper-100 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition hover:bg-paper-50 focus:bg-paper-50"
+                  className="w-full rounded-lg bg-paper-50 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition hover:ring-paper-400 focus:ring-petrol-400 dark:ring-paper-400"
                 />
               ) : card.due_date !== null ? (
                 <DueBadge dueDate={card.due_date} />
@@ -448,7 +448,7 @@ export default function CardDetail({
             )}
           </div>
 
-          <footer className="flex shrink-0 items-center gap-2 border-t border-paper-300/60 px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-3">
+          <footer className="flex shrink-0 items-center gap-2 border-t border-paper-300 px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-3">
             {editing ? (
               <>
                 <Button size="sm" disabled={saving} onClick={() => void handleSave()}>

@@ -45,10 +45,10 @@ export default function SearchField({ value, onChange }: SearchFieldProps) {
             event.currentTarget.blur();
           }
         }}
-        className="h-9 w-full rounded-lg bg-paper-100 pr-10 pl-9 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:bg-paper-50 focus:bg-paper-50"
+        className="h-9 w-full rounded-lg bg-paper-100 pr-10 pl-9 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:bg-paper-50 focus:bg-paper-50 focus:ring-petrol-400 dark:ring-paper-400"
       />
       {value.length === 0 && (
-        <kbd className="pointer-events-none absolute top-1/2 right-2.5 hidden -translate-y-1/2 rounded border border-paper-300 bg-paper-50 px-1.5 py-0.5 font-mono text-[10px] text-ink-400 sm:block">
+        <kbd className="pointer-events-none absolute top-1/2 right-2.5 hidden -translate-y-1/2 rounded border border-paper-300 bg-paper-50 px-1.5 py-0.5 text-[11px] font-medium text-ink-400 sm:block">
           /
         </kbd>
       )}

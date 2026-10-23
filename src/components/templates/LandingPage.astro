@@ -2,6 +2,8 @@
 import LandingHeader from '../organisms/LandingHeader.astro';
 import LandingHero from '../organisms/LandingHero.astro';
 import LandingCapabilities from '../organisms/LandingCapabilities.astro';
+import LandingViews from '../organisms/LandingViews.astro';
+import LandingPrinciples from '../organisms/LandingPrinciples.astro';
 import LandingFooter from '../organisms/LandingFooter.astro';
 import { LANDING_COPY } from '../../i18n/landing';
 import type { Locale } from '../../i18n';
@@ -19,6 +21,8 @@ const copy = LANDING_COPY[locale];
   <main class="flex-1">
     <LandingHero copy={copy} />
     <LandingCapabilities copy={copy} />
+    <LandingViews copy={copy} />
+    <LandingPrinciples copy={copy} />
   </main>
   <LandingFooter locale={locale} copy={copy} />
 </div>

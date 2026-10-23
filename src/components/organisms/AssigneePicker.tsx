@@ -95,7 +95,7 @@ export default function AssigneePicker({
         aria-label={t('board.searchUser')}
         autoComplete="off"
         onChange={(event) => setQuery(event.target.value)}
-        className="mb-3 w-full rounded-lg bg-paper-100 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:bg-paper-50 focus:bg-paper-50"
+        className="mb-3 w-full rounded-lg bg-paper-50 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:ring-paper-400 focus:ring-petrol-400 dark:ring-paper-400"
       />
 
       {loading ? (
@@ -103,7 +103,7 @@ export default function AssigneePicker({
           <Spinner label={t('app.loading')} size="sm" />
         </div>
       ) : results.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-paper-300 px-3 py-5 text-center text-[11px] leading-relaxed text-ink-400">
+        <p className="rounded-lg border border-dashed border-paper-400/60 px-3 py-5 text-center text-[11px] leading-relaxed text-ink-400">
           {t('board.noUsers')}
         </p>
       ) : (
@@ -120,7 +120,7 @@ export default function AssigneePicker({
                   aria-checked={isOn}
                   disabled={pendingId !== null}
                   onClick={() => void toggle(user)}
-                  className={`flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left transition-colors disabled:opacity-50 ${
+                  className={`flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left transition-colors disabled:opacity-50 max-md:min-h-11 ${
                     isOn ? 'bg-petrol-50' : 'hover:bg-paper-100'
                   }`}
                 >

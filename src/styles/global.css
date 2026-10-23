@@ -1,107 +1,132 @@
+@import '@fontsource-variable/inter';
 @import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* surfaces — light */
+  /* surfaces, light */
   --color-paper-50: #ffffff;
-  --color-paper-100: #f6f8f4;
-  --color-paper-200: #eef1ea;
-  --color-paper-300: #d8ded1;
-  --color-paper-400: #a8b1a0;
+  --color-paper-100: #f7f7f5;
+  --color-paper-200: #f1f1ef;
+  --color-paper-300: #e3e2df;
+  --color-paper-400: #c7c6c2;
 
-  /* text — light */
-  --color-ink-400: #5c6b64;
-  --color-ink-600: #33443d;
-  --color-ink-800: #1b2a25;
-  --color-ink-900: #0f1a16;
+  /* text, light */
+  --color-ink-400: #6f6e69;
+  --color-ink-600: #5f5e5b;
+  --color-ink-800: #2f2e2a;
+  --color-ink-900: #191918;
 
-  /* petrol — primary */
-  --color-petrol-50: #e9f2f1;
-  --color-petrol-200: #a9ccc9;
-  --color-petrol-400: #31716b;
-  --color-petrol-600: #14635f;
-  --color-petrol-700: #0f4c4a;
-  --color-petrol-900: #082e2d;
+  /* brand blue, primary action */
+  --color-petrol-50: #eaf4fd;
+  --color-petrol-200: #c7e3fa;
+  --color-petrol-400: #2f6fb0;
+  --color-petrol-600: #0075de;
+  --color-petrol-700: #005bab;
+  --color-petrol-900: #0a3a66;
 
-  /* saffron — attention / due soon */
-  --color-saffron-100: #faedcf;
-  --color-saffron-400: #e3ac36;
-  --color-saffron-600: #815708;
+  /* warning, due soon */
+  --color-saffron-100: #fff4e0;
+  --color-saffron-400: #f5a623;
+  --color-saffron-600: #8a5a00;
 
-  /* berry — overdue / destructive */
-  --color-berry-100: #f7dfe6;
-  --color-berry-500: #a32c4e;
-  --color-berry-700: #7d1d3a;
+  /* danger, overdue / destructive */
+  --color-berry-100: #feeceb;
+  --color-berry-500: #d92d20;
+  --color-berry-700: #a61b12;
 
-  /* Always-dark surfaces (sidebar, auth hero) + their always-light text. */
-  --color-nav-surface: #082e2d;
-  --color-nav-raised: #0f4c4a;
-  --color-nav-text: #f6f8f4;
-  --color-nav-muted: #8fa8a4;
-  --color-nav-border: #14504d;
-  --color-nav-accent: #14635f;
+  /* mint, quiet success / hero badge */
+  --color-mint-100: #d7f5d6;
+  --color-mint-600: #1f7a3a;
 
-  --color-onaccent: #f6f8f4;
+  /* Sidebar (always follows the page theme) + text on it. */
+  --color-nav-surface: #f7f7f5;
+  --color-nav-raised: #efefed;
+  --color-nav-text: #2f2e2a;
+  --color-nav-muted: #6f6e69;
+  --color-nav-border: #e3e2df;
 
-  --color-scrim: oklch(0.18 0.02 165 / 0.42);
+  --color-onaccent: #ffffff;
 
-  --font-display:
-    'Bricolage Grotesque', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Archivo', 'Noto Sans SC', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --color-scrim: rgb(15 15 15 / 0.42);
+
+  --font-sans:
+    'Inter Variable', 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei',
+    ui-sans-serif, system-ui, sans-serif;
 }
 
 /*
   Dark theme. Redefining the same variables means `bg-paper-50` becomes a dark
-  raised surface and `text-ink-900` becomes near-white automatically — the
-  contrast direction is preserved, so nothing ends up light-on-light.
+  raised surface and `text-ink-900` becomes near-white automatically, so the
+  contrast direction is preserved and nothing ends up light-on-light.
 */
 .dark {
-  --color-paper-50: #16211d;
-  --color-paper-100: #111a17;
-  --color-paper-200: #0b120f;
-  --color-paper-300: #2a3833;
-  --color-paper-400: #5d6d66;
+  --color-paper-50: #242424;
+  --color-paper-100: #191919;
+  --color-paper-200: #141414;
+  --color-paper-300: #383838;
+  --color-paper-400: #6e6e6e;
 
-  --color-ink-400: #93a29b;
-  --color-ink-600: #c3cec8;
-  --color-ink-800: #e4eae5;
-  --color-ink-900: #f4f7f4;
+  --color-ink-400: #9b9a97;
+  --color-ink-600: #c7c6c2;
+  --color-ink-800: #e8e7e4;
+  --color-ink-900: #f7f7f5;
 
-  --color-petrol-50: #10312f;
-  --color-petrol-200: #1d4c49;
-  --color-petrol-400: #4e9d97;
-  --color-petrol-600: #58b3ab;
-  --color-petrol-700: #7cc9c1;
-  --color-petrol-900: #dff0ee;
+  --color-petrol-50: #12283d;
+  --color-petrol-200: #1b3e5f;
+  --color-petrol-400: #7ab6f0;
+  --color-petrol-600: #4c9eea;
+  --color-petrol-700: #7ab6f0;
+  --color-petrol-900: #d6e9fb;
 
-  --color-saffron-100: #3a2c0d;
-  --color-saffron-400: #e8b955;
-  --color-saffron-600: #f0c877;
+  --color-saffron-100: #362a14;
+  --color-saffron-400: #f5b94d;
+  --color-saffron-600: #f5c97a;
 
-  --color-berry-100: #3b1220;
-  --color-berry-500: #e8788f;
-  --color-berry-700: #f0a8bd;
+  --color-berry-100: #3a1a17;
+  --color-berry-500: #f27a70;
+  --color-berry-700: #f5a39b;
 
-  --color-onaccent: #0b1614;
+  --color-mint-100: #17301b;
+  --color-mint-600: #8fda9c;
 
-  --color-scrim: oklch(0.08 0.01 165 / 0.62);
+  --color-nav-surface: #191919;
+  --color-nav-raised: #262626;
+  --color-nav-text: #f7f7f5;
+  --color-nav-muted: #9b9a97;
+  --color-nav-border: #2f2f2f;
+
+  --color-onaccent: #101820;
+
+  --color-scrim: rgb(0 0 0 / 0.62);
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
 
   body {
     font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
 
   :focus-visible {
     outline: 2px solid var(--color-petrol-600);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-petrol-200);
+    color: var(--color-ink-900);
   }
 
   .dark input[type='date']::-webkit-calendar-picker-indicator {

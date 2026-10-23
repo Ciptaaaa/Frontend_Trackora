@@ -48,7 +48,7 @@ export default function Topbar({
   const t = useT();
 
   return (
-    <header className="flex h-14 shrink-0 items-center gap-2 border-b border-paper-300/60 bg-paper-50 px-3 sm:gap-3 sm:px-5">
+    <header className="flex h-14 shrink-0 items-center gap-1 border-b border-paper-300 bg-paper-50 px-1.5 sm:gap-2 sm:px-4">
       <IconButton
         icon="grip"
         label={t('nav.openMenu')}
@@ -71,19 +71,21 @@ export default function Topbar({
         />
       )}
 
-      <span className="hidden items-center rounded-md bg-paper-100 px-2 py-1 font-mono text-[11px] text-ink-400 tabular-nums xl:inline-flex">
+      <span className="hidden items-center rounded-md bg-paper-100 px-2 py-1 text-[11px] font-medium text-ink-400 tabular-nums xl:inline-flex">
         {t('board.cardCount', { count: cardCount })}
       </span>
 
-      <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
-        <div className="hidden sm:block">
+      <div className="ml-auto flex items-center gap-1 sm:gap-2">
+        <div className="hidden w-56 sm:block lg:w-64">
           <SearchField value={query} onChange={onQueryChange} />
         </div>
         <span className="hidden lg:block">
           <ThemeToggle preference={theme} onChange={onThemeChange} />
         </span>
 
-        <LocaleSwitcher />
+        <span className="hidden sm:block">
+          <LocaleSwitcher />
+        </span>
 
         <IconButton
           icon="tag"
@@ -91,7 +93,7 @@ export default function Topbar({
           onClick={onManageLabels}
         />
 
-        <Button size="sm" onClick={onNewBoard} className="hidden xl:inline-flex">
+        <Button size="sm" onClick={onNewBoard} className="max-xl:hidden xl:inline-flex">
           <Icon name="plus" className="size-3.5" />
           {t('board.new')}
         </Button>

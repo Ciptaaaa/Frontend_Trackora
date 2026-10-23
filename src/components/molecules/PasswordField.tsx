@@ -35,13 +35,13 @@ export default function PasswordField({
           id={fieldId}
           type={visible ? 'text' : 'password'}
           aria-describedby={hintId}
-          className={`h-11 w-full rounded-lg bg-paper-100 pr-20 pl-3 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:bg-paper-50 focus:bg-paper-50 ${className}`}
+          className={`h-11 w-full rounded-lg bg-paper-50 pr-20 pl-3 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:ring-paper-400 focus:bg-paper-50 focus:ring-petrol-400 dark:ring-paper-400 ${className}`}
           {...rest}
         />
         <button
           type="button"
           onClick={() => setVisible((value) => !value)}
-          className="absolute top-1/2 right-2 -translate-y-1/2 rounded-md px-2 py-1 text-[11px] font-medium text-ink-400 transition-colors hover:bg-paper-200 hover:text-ink-800"
+          className="absolute top-1/2 right-1.5 inline-flex h-11 -translate-y-1/2 items-center rounded-md px-2 text-[11px] font-medium text-ink-400 transition-colors hover:bg-paper-200 hover:text-ink-800"
         >
           {visible ? t('password.hide') : t('password.show')}
         </button>

@@ -130,10 +130,10 @@ export default function BoardColumn({
         setOver(false);
         onDropCard(list.public_id);
       }}
-      className={`flex h-full max-h-full min-w-0 flex-col rounded-xl transition-colors duration-150 ${
+      className={`relative flex h-full max-h-full min-w-0 snap-start flex-col rounded-xl transition-colors duration-150 ${
         over && draggingId !== null
           ? 'bg-petrol-50 ring-2 ring-petrol-400'
-          : 'bg-paper-100 ring-1 ring-paper-300/60'
+          : 'bg-paper-200 ring-1 ring-paper-300/70 dark:ring-paper-400/40'
       }`}
     >
       <header className="flex shrink-0 items-center gap-2 px-3 py-2.5">
@@ -161,14 +161,14 @@ export default function BoardColumn({
             {done && (
               <Icon
                 name="check"
-                className="size-3.5 shrink-0 text-petrol-600"
+                className="size-3.5 shrink-0 text-mint-600"
                 aria-hidden="true"
               />
             )}
-            <h2 className="min-w-0 truncate text-[13px] font-semibold tracking-tight text-ink-800">
+            <h2 className="min-w-0 truncate text-[13px] font-semibold tracking-[-0.01em] text-ink-800">
               {list.title}
             </h2>
-            <span className="font-mono text-[11px] text-ink-400 tabular-nums">
+            <span className="rounded-full bg-black/5 px-1.5 py-0.5 text-[11px] font-medium text-ink-400 tabular-nums dark:bg-white/10">
               {cards.length}
             </span>
             {overdue > 0 && (
@@ -182,7 +182,7 @@ export default function BoardColumn({
               </span>
             )}
             {matches > 0 && (
-              <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-petrol-600 px-1.5 py-0.5 font-mono text-[10px] font-medium text-onaccent tabular-nums">
+              <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-petrol-600 px-1.5 py-0.5 text-[11px] font-medium text-onaccent tabular-nums">
                 {matches}
                 <span className="sr-only">
                   {t('column.highlightCount', { count: matches })}
@@ -221,7 +221,7 @@ export default function BoardColumn({
         ))}
 
         {cards.length === 0 && (
-          <p className="rounded-lg border border-dashed border-paper-300 px-3 py-6 text-center text-[11px] leading-relaxed text-ink-400">
+          <p className="rounded-lg border border-dashed border-paper-400/60 bg-paper-100/60 px-3 py-6 text-center text-[11px] leading-relaxed text-ink-400">
             {filtered ? t('column.emptyFiltered') : t('column.empty')}
           </p>
         )}

@@ -73,9 +73,9 @@ export default function AuthForm({
   }
 
   return (
-    <div className="w-full max-w-sm">
+    <div className="w-full max-w-sm rounded-2xl bg-paper-50 p-6 ring-1 ring-paper-300 shadow-sm sm:p-7 dark:ring-paper-400">
       <div className="mb-7">
-        <h1 className="font-display text-2xl leading-tight font-semibold tracking-tight text-ink-900">
+        <h1 className="text-2xl leading-tight font-semibold tracking-tight text-ink-900">
           {isRegister ? t('auth.registerTitle') : t('auth.loginTitle')}
         </h1>
         <p className="mt-1.5 text-sm text-ink-400">
@@ -141,15 +141,10 @@ export default function AuthForm({
         <button
           type="button"
           onClick={() => switchMode(isRegister ? 'login' : 'register')}
-          className="rounded font-medium text-petrol-600 underline underline-offset-2 transition-colors hover:text-petrol-700"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded px-0.5 font-medium text-petrol-700 underline underline-offset-2 transition-colors hover:text-petrol-600"
         >
           {isRegister ? t('auth.toLogin') : t('auth.toRegister')}
         </button>
-      </p>
-
-      <p className="mt-6 rounded-lg bg-saffron-100 px-3 py-2.5 text-[11px] leading-relaxed text-saffron-600">
-        <strong className="font-semibold">{t('auth.testMode')}</strong>{' '}
-        {t('auth.testModeBody')}
       </p>
     </div>
   );

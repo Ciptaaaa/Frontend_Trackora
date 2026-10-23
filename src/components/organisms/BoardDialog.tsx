@@ -175,7 +175,7 @@ export default function BoardDialog({
             value={dueDate}
             onChange={(event) => setDueDate(event.target.value)}
             disabled={saving}
-            className="w-full rounded-lg bg-paper-100 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition hover:bg-paper-50 focus:bg-paper-50"
+            className="w-full rounded-lg bg-paper-50 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition hover:ring-paper-400 focus:ring-petrol-400 dark:ring-paper-400"
           />
         </div>
 
@@ -222,11 +222,11 @@ export default function BoardDialog({
               onChange={(event) => setQuery(event.target.value)}
               disabled={saving}
               autoComplete="off"
-              className="w-full rounded-lg bg-paper-100 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:bg-paper-50 focus:bg-paper-50"
+              className="w-full rounded-lg bg-paper-50 px-3 py-2 text-sm text-ink-900 ring-1 ring-paper-300 ring-inset transition placeholder:text-ink-400 hover:ring-paper-400 focus:ring-petrol-400 dark:ring-paper-400"
             />
 
             {showResults && (
-              <div className="absolute top-full right-0 left-0 z-10 mt-1 overflow-hidden rounded-xl bg-paper-50 shadow-lg ring-1 ring-paper-300">
+              <div className="absolute top-full right-0 left-0 z-10 mt-1 overflow-hidden rounded-xl bg-paper-50 shadow-xl ring-1 ring-paper-300 dark:ring-paper-400">
                 {searching ? (
                   <div className="flex justify-center py-4">
                     <Spinner label={t('app.loading')} size="sm" />
@@ -245,7 +245,7 @@ export default function BoardDialog({
                             type="button"
                             onClick={() => stageMember(user)}
                             disabled={alreadyStaged}
-                            className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left transition hover:bg-paper-100 disabled:pointer-events-none disabled:opacity-45"
+                            className="flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left transition hover:bg-paper-100 disabled:pointer-events-none disabled:opacity-45 max-md:min-h-11"
                           >
                             <Avatar user={user} size="sm" />
                             <span className="min-w-0 flex-1">

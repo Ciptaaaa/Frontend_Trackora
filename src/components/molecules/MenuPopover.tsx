@@ -58,7 +58,7 @@ export default function MenuPopover({
         <div
           role="menu"
           aria-label={label}
-          className={`absolute top-full z-40 mt-1 w-44 overflow-hidden rounded-xl bg-paper-50 p-1 shadow-lg ring-1 ring-paper-300 ${
+          className={`absolute top-full z-40 mt-1 w-44 overflow-hidden rounded-xl bg-paper-50 p-1 shadow-xl ring-1 ring-paper-300 dark:ring-paper-400 ${
             align === 'right' ? 'right-0' : 'left-0'
           }`}
         >
@@ -72,7 +72,7 @@ export default function MenuPopover({
                 setOpen(false);
                 action.onSelect();
               }}
-              className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-xs font-medium transition-colors disabled:pointer-events-none disabled:opacity-40 ${
+              className={`flex min-h-9 w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-[13px] font-medium transition-colors disabled:pointer-events-none disabled:opacity-40 max-md:min-h-11 ${
                 action.tone === 'danger'
                   ? 'text-berry-500 hover:bg-berry-100'
                   : 'text-ink-600 hover:bg-paper-100 hover:text-ink-900'

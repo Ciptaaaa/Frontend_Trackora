@@ -41,13 +41,27 @@ const canonical = landingUrl(locale);
     <meta property="og:description" content={copy.metaDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={copy.ogLocale} />
+    <meta name="theme-color" content="#f7f7f5" />
+    <script is:inline>
+      (() => {
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (!meta) return;
+        const sync = () => {
+          meta.setAttribute(
+            'content',
+            document.documentElement.classList.contains('dark')
+              ? '#191919'
+              : '#f7f7f5',
+          );
+        };
+        new MutationObserver(sync).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class'],
+        });
+        sync();
+      })();
+    </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&display=swap"
-    />
     <script is:inline>
       (() => {
         try {
