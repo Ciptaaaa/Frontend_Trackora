@@ -11,6 +11,28 @@ const { locale } = Astro.props;
 const copy = LANDING_COPY[locale];
 
 const canonical = landingUrl(locale);
+const siteUrl = landingUrl('id');
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'Trackora',
+      alternateName: 'Trackora Web ID',
+      url: siteUrl,
+      inLanguage: LOCALES.map((entry) => entry.htmlLang),
+      publisher: { '@id': `${siteUrl}#organization` },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}#organization`,
+      name: 'Trackora',
+      url: siteUrl,
+      sameAs: ['https://github.com/Ciptaaaa/Frontend_Trackora'],
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -33,7 +55,7 @@ const canonical = landingUrl(locale);
         />
       ))
     }
-    <link rel="alternate" hreflang="x-default" href={landingUrl('en')} />
+    <link rel="alternate" hreflang="x-default" href={landingUrl('id')} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Trackora" />
@@ -42,6 +64,11 @@ const canonical = landingUrl(locale);
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={copy.ogLocale} />
     <meta name="theme-color" content="#f7f7f5" />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
     <script is:inline>
       (() => {
         const meta = document.querySelector('meta[name="theme-color"]');
