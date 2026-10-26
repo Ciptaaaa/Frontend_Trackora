@@ -14,8 +14,8 @@ Papan kerja pribadi bergaya Trello. Frontend untuk
 | UI        | React 19 (island, `client:load`)                   |
 | Bahasa    | TypeScript strict, tanpa `any`                     |
 | Styling   | Tailwind CSS 4 (`@tailwindcss/vite`)               |
-| Font      | Inter Variable (`@fontsource-variable/inter`)      |
-| Tema      | Light / dark / ikut sistem (token semantik)        |
+| Font      | Noto Sans Variable + Playfair Display (heading)    |
+| Tema      | Light / dark (token semantik)                      |
 | Bahasa UI | Indonesia · English · 中文 (i18n sendiri)            |
 | SEO       | `@astrojs/sitemap`, `robots.txt`, canonical + hreflang, JSON-LD |
 
@@ -33,9 +33,10 @@ Saffron menandai jatuh tempo dekat, berry untuk terlambat, mint untuk selesai.
 Nama token `petrol` dipertahankan meski nilainya biru, supaya kelas lama tidak
 perlu diganti.
 
-Tipografi memakai **Inter Variable** untuk seluruh UI, termasuk angka
-(`tabular-nums`). Tidak ada font display terpisah: hierarki dibangun dari ukuran,
-ketebalan, dan tracking negatif di judul besar.
+Tipografi memakai **Noto Sans Variable** untuk seluruh UI, termasuk angka
+(`tabular-nums`), dengan **Playfair Display** tersedia sebagai opsi heading
+(`font-heading`). Hierarki dibangun dari ukuran, ketebalan, dan tracking negatif,
+bukan dari banyak keluarga font.
 
 Token permukaan dan teks bukan warna literal, tapi ramp semantik. Di dark mode
 variabel yang sama didefinisikan ulang, jadi `bg-paper-50` otomatis menjadi
@@ -84,9 +85,9 @@ src/
 │   │                Logo Spinner Eyebrow DueChip
 │   ├── molecules/   NavItem SearchField BoardSwitcher DueBadge AvatarGroup DayCell
 │   │                AddCardForm AddListForm PasswordField ThemeToggle
-│   │                LandingThemeToggle LocaleSwitcher LocaleLinks Modal
-│   │                MenuPopover DetailSection CapabilityRow SpineCard
-│   │                WeekSpineStatic
+│   │                LocaleSwitcher LocaleLinks Modal MenuPopover DetailSection
+│   │                CapabilityRow SpineCard WeekSpineStatic
+│   ├── ui/           animated-theme-toggler.tsx (toggle tema landing)
 │   ├── organisms/   Sidebar Topbar WeekSpine TaskCard BoardColumn CardDetail
 │   │                BoardDialog LabelManager LabelPicker AssigneePicker
 │   │                CommentThread AuthForm AccountMenu SettingsDialog MobileIsland
@@ -151,6 +152,10 @@ animasi mengetik berjalan berulang dengan kecepatan per bahasa (`speed`, `hold`,
 atau JavaScript tidak jalan. Tinggi h1 dikunci oleh teks asli, jadi tidak ada
 layout shift selama siklus ketik dan hapus.
 
+Toggle tema memakai `AnimatedThemeToggler`: satu tombol terang/gelap dengan
+transisi View Transition, tanpa opsi ikut sistem. Preferensinya ditulis ke key
+`trackora.v1.theme`, jadi pilihan di landing dan di dalam app saling terbawa.
+
 ## SEO
 
 `astro.config.mjs` menetapkan `site: https://www.trackora.web.id` (apex
@@ -202,8 +207,8 @@ Lain-lain: filter pencarian (judul, deskripsi, nama label) dengan `/` untuk
 fokus dan `Esc` untuk bersihkan, filter Due/Overdue dari sidebar maupun island,
 sorotan per hari lewat week spine, drawer di layar kecil dengan rail tablet yang
 bisa dibuka, island navigasi di bawah untuk ponsel, menu akun dengan pengaturan
-profil, tema light/dark/ikut sistem, dan bahasa ID/EN/中文 — tiga yang terakhir
-tersimpan di `localStorage`.
+profil, tema light/dark, dan bahasa ID/EN/中文 — tiga yang terakhir tersimpan di
+`localStorage`.
 
 ### Batasan yang datang dari backend
 
@@ -461,10 +466,14 @@ tema: `nav-*` (sidebar dan panel brand di halaman login), `nav-accent` (baris
 board aktif), dan `scrim` (latar modal). Kalau ikut berubah, sidebar akan jadi
 gelap-di-atas-gelap.
 
-Kontrol tema ada tiga posisi (terang / gelap / ikut sistem), bukan switch dua
-posisi — "ikut sistem" itu preferensi nyata dan akan hilang kalau dipaksa biner.
-Ada skrip kecil inline di `Layout.astro` yang jalan **sebelum paint**, jadi
-pengguna dark mode tidak kena kedip putih saat halaman dibuka.
+Kontrol tema sekarang dua posisi (terang / gelap) di landing maupun di dalam
+app, memakai `AnimatedThemeToggler` dengan transisi View Transition. Nilai lama
+`system` di `localStorage` masih dihormati skrip pre-paint saat halaman pertama
+dibuka, lalu berganti menjadi pilihan eksplisit begitu pengguna menekan toggle.
+
+Ada skrip kecil inline di `Layout.astro` dan `LandingLayout.astro` yang jalan
+**sebelum paint**, jadi pengguna dark mode tidak kena kedip putih saat halaman
+dibuka.
 
 Semua pasangan warna teks/latar sudah dihitung rasio kontrasnya dan **lulus WCAG
 AA (≥ 4.5:1) di kedua tema**. Dua pasangan light mode awalnya masih 4.2–4.3
