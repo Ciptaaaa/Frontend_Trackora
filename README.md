@@ -1,19 +1,23 @@
 # Trackora — Frontend
 
+**Live:** <https://www.trackora.web.id>
+
 Papan kerja pribadi bergaya Trello. Frontend untuk
 [Project-Management API](https://github.com/Ciptaaaa/Project-Management)
 (Go + Fiber v3 + GORM + PostgreSQL).
 
 ## Stack
 
-| Bagian    | Teknologi                                |
-| --------- | ---------------------------------------- |
-| Framework | Astro 5                                  |
-| UI        | React 19 (island, `client:load`)         |
-| Bahasa    | TypeScript strict — nol `any`            |
-| Styling   | Tailwind CSS 4 (`@tailwindcss/vite`)     |
-| Tema      | Light / dark / ikut sistem               |
-| Bahasa UI | Indonesia · English · 中文 (i18n sendiri)  |
+| Bagian    | Teknologi                                          |
+| --------- | -------------------------------------------------- |
+| Framework | Astro 7 (`7.4.2`), output statis                   |
+| UI        | React 19 (island, `client:load`)                   |
+| Bahasa    | TypeScript strict, tanpa `any`                     |
+| Styling   | Tailwind CSS 4 (`@tailwindcss/vite`)               |
+| Font      | Inter Variable (`@fontsource-variable/inter`)      |
+| Tema      | Light / dark / ikut sistem (token semantik)        |
+| Bahasa UI | Indonesia · English · 中文 (i18n sendiri)            |
+| SEO       | `@astrojs/sitemap`, `robots.txt`, canonical + hreflang, JSON-LD |
 
 ```bash
 npm install
@@ -23,14 +27,19 @@ npm run build    # astro check + build
 
 ## Arah desain
 
-Palet **mineral & petrol**: kertas kehijauan dingin (`paper`), tinta petrol
-gelap (`ink`/`petrol`), safron untuk perhatian, berry untuk terlambat. Sengaja
-menghindari kombinasi slate + indigo yang jadi default dashboard.
+Palet **kertas dan petrol**: neutral hangat `paper-*` untuk permukaan, `ink-*`
+untuk teks, dan `petrol-*` (biru) sebagai satu aksen utama untuk tindakan.
+Saffron menandai jatuh tempo dekat, berry untuk terlambat, mint untuk selesai.
+Nama token `petrol` dipertahankan meski nilainya biru, supaya kelas lama tidak
+perlu diganti.
 
-Tipografi tiga peran: **Bricolage Grotesque** (display, dipakai hemat — hanya
-judul board dan judul kartu di panel detail), **Archivo** (body/UI), **JetBrains
-Mono** (angka: tanggal, jumlah kartu, hitungan). Semua angka pakai `tabular-nums`
-supaya tidak bergeser saat berubah.
+Tipografi memakai **Inter Variable** untuk seluruh UI, termasuk angka
+(`tabular-nums`). Tidak ada font display terpisah: hierarki dibangun dari ukuran,
+ketebalan, dan tracking negatif di judul besar.
+
+Token permukaan dan teks bukan warna literal, tapi ramp semantik. Di dark mode
+variabel yang sama didefinisikan ulang, jadi `bg-paper-50` otomatis menjadi
+permukaan gelap tanpa menambah varian `dark:` di setiap elemen.
 
 ### Elemen signature: week spine
 
@@ -61,9 +70,10 @@ Alasan memilih ini: board memberi tahu *apa* yang dikerjakan, tapi tidak pernah
 *kapan* semuanya menumpuk. Karena backend punya `due_date` di card, informasi itu
 sudah ada — cuma belum pernah ditampilkan sebagai satu garis waktu.
 
-Urgensi juga dibawa di **tepi kiri tiap kartu** sebagai bilah warna (berry =
-terlambat, safron = hari ini/dekat, petrol = masih jauh), bukan pill tambahan,
-supaya kolom tetap mudah dipindai.
+Urgensi dibawa oleh **chip tanggal** (`DueBadge`): berry untuk terlambat,
+saffron untuk hari ini atau dekat, netral untuk yang masih jauh. Kartu yang
+sedang disorot memakai ring petrol, bukan bilah tambahan, supaya kolom tetap
+mudah dipindai.
 
 ## Struktur (atomic design)
 
@@ -71,20 +81,28 @@ supaya kolom tetap mudah dipindai.
 src/
 ├── components/
 │   ├── atoms/       Button IconButton Icon LabelChip Avatar TextField TextArea
-│   │                Logo Spinner
+│   │                Logo Spinner Eyebrow DueChip
 │   ├── molecules/   NavItem SearchField BoardSwitcher DueBadge AvatarGroup DayCell
-│   │                AddCardForm AddListForm PasswordField ThemeToggle LocaleSwitcher
-│   │                Modal MenuPopover DetailSection
+│   │                AddCardForm AddListForm PasswordField ThemeToggle
+│   │                LandingThemeToggle LocaleSwitcher LocaleLinks Modal
+│   │                MenuPopover DetailSection CapabilityRow SpineCard
+│   │                WeekSpineStatic
 │   ├── organisms/   Sidebar Topbar WeekSpine TaskCard BoardColumn CardDetail
 │   │                BoardDialog LabelManager LabelPicker AssigneePicker
 │   │                CommentThread AuthForm AccountMenu SettingsDialog MobileIsland
-│   └── templates/   TrackoraApp AppShell AuthScreen
-├── i18n/            dictionaries.ts · index.ts · LocaleContext.tsx
-├── layouts/Layout.astro
-├── lib/             date.ts (due state, week spine) · completion.ts (kolom selesai)
-│                    view.ts (filter due/overdue) · useDismissable.ts
-│                    api.ts · config.ts · theme.ts · errors.ts · scrollLock.ts
-├── pages/index.astro
+│   │                LandingHeader LandingHero LandingCapabilities LandingViews
+│   │                LandingPrinciples LandingFooter
+│   └── templates/   TrackoraApp AppShell AuthScreen LandingPage
+├── i18n/            dictionaries.ts (id, en, zh) · index.ts · landing.ts
+│                    LocaleContext.tsx
+├── layouts/         Layout.astro (app, noindex) · LandingLayout.astro
+│                    (canonical, hreflang, OG, JSON-LD)
+├── lib/             api.ts · config.ts · router.ts · session.ts
+│                    date.ts (due state, week spine) · completion.ts (kolom selesai)
+│                    view.ts (filter due/overdue) · theme.ts · errors.ts
+│                    scrollLock.ts · useDismissable.ts
+├── pages/           index.astro (id) · [lang].astro (en, zh)
+│                    [...slug].astro (login, register, boards) · 404.astro
 ├── styles/global.css   @theme token + override .dark
 └── types/domain.ts     tipe yang mencerminkan API
 ```
@@ -92,6 +110,66 @@ src/
 Semua panggilan HTTP tinggal di `src/lib/api.ts`. Di situlah selisih antara
 bentuk JSON backend dan tipe domain frontend diselesaikan — komponen tidak perlu
 tahu soal typo field `assigness`, tabel pivot, atau key PascalCase.
+
+## Rute
+
+| URL                                    | Isi                              | Sumber                  |
+| -------------------------------------- | -------------------------------- | ----------------------- |
+| `/`                                    | Landing Indonesia                | `pages/index.astro`     |
+| `/en/`, `/zh/`                         | Landing English / 中文           | `pages/[lang].astro`    |
+| `/login`, `/register`                  | Autentikasi                      | `pages/[...slug].astro` |
+| `/boards`, `/boards/:id`, `/boards/:id/cards/:cid` | Aplikasi papan       | `pages/[...slug].astro` + `lib/router.ts` |
+| `/404`                                 | Halaman 404                      | `pages/404.astro`       |
+
+Landing dan app memakai layout berbeda: `LandingLayout` untuk halaman publik,
+`Layout` untuk halaman app yang diberi `noindex`.
+
+Build statis hanya menghasilkan `/boards/index.html`. URL di dalam `/boards/...`
+dibentuk lewat History API, jadi membuka atau me-refresh URL tersebut langsung
+akan 404 di host sampai ada rewrite scoped (lihat Catatan build).
+
+## Landing page
+
+Halaman publik dirakit dari `LandingPage.astro`: `LandingHeader`,
+`LandingHero` (demo week spine), `LandingCapabilities`, `LandingViews`,
+`LandingPrinciples`, lalu `LandingFooter`. Semua copy ada di
+`src/i18n/landing.ts`, satu objek per bahasa, jadi tidak ada teks yang tersebar
+di markup.
+
+Header sticky menempel penuh di ponsel, lalu mulai `sm` mengambang sebagai pil
+(`rounded-full`) dengan border dan shadow tipis. Tautan navigasinya menuju
+section yang benar-benar ada (`#tampilan`, `#prinsip`, `#mulai`).
+
+Kontrol muncul bertahap supaya bar tidak padat di tablet: pemilih tema dan
+tombol masuk tampil sejak `sm`, tautan section sejak `lg`, dan chip
+"Minggu ini" sejak `xl`. Tombol tema, locale, nav, dan CTA tetap 44px, bukan
+36px seperti sebelumnya.
+
+Headline memakai `TypingHeadline`: teks lengkap tetap ada di HTML untuk crawler,
+animasi mengetik berjalan berulang dengan kecepatan per bahasa (`speed`, `hold`,
+`loop`), dan berhenti menjadi teks statis saat `prefers-reduced-motion` aktif
+atau JavaScript tidak jalan. Tinggi h1 dikunci oleh teks asli, jadi tidak ada
+layout shift selama siklus ketik dan hapus.
+
+## SEO
+
+`astro.config.mjs` menetapkan `site: https://www.trackora.web.id` (apex
+`trackora.web.id` redirect 308 ke www). Domain yang sama dipakai
+`src/i18n/landing.ts` untuk canonical, hreflang, dan `og:url`, dengan
+`PUBLIC_SITE_URL` sebagai override opsional.
+
+- `@astrojs/sitemap` menghasilkan `sitemap-index.xml` dan `sitemap-0.xml` berisi
+  tiga landing (`/`, `/en/`, `/zh/`) plus hreflang id/en/zh-CN. `/login`,
+  `/register`, dan `/boards` dikeluarkan lewat filter.
+- `public/robots.txt` mengizinkan landing, menutup halaman privat, dan menunjuk
+  ke sitemap.
+- `LandingLayout.astro` menulis canonical self-referencing per bahasa, hreflang
+  termasuk `x-default` ke `/`, OG dasar, dan JSON-LD `WebSite` + `Organization`.
+- `Layout.astro` (halaman app) menulis `noindex`.
+
+Setelah deploy, daftarkan `https://www.trackora.web.id/sitemap-index.xml` di
+Google Search Console. Indexing bukan ranking: sitemap mempercepat penemuan
+halaman, bukan menaikkan posisi.
 
 ## Kontrak data
 
@@ -409,9 +487,10 @@ error saat compile**, bukan string kosong yang baru ketahuan di layar. Saat ini
 190 key, ketiganya lengkap.
 
 Tanggal tidak di-hardcode: nama hari dan bulan diambil dari `Intl`
-(`id-ID` / `en-GB` / `zh-CN`), jadi week spine ikut berubah bahasanya. Font
-`Noto Sans SC` dimuat sebagai fallback supaya teks Mandarin tidak jatuh ke font
-sistem yang tidak serasi.
+(`id-ID` / `en-GB` / `zh-CN`), jadi week spine ikut berubah bahasanya. Stack font
+menyebut `Noto Sans SC`, `PingFang SC`, dan `Microsoft YaHei` sebagai fallback
+sistem supaya teks Mandarin tidak jatuh ke font yang tidak serasi; font itu
+tidak diunduh.
 
 ## Catatan build
 
@@ -428,3 +507,10 @@ node node_modules/typescript/lib/tsc.js --noEmit -p tsconfig.json
 `tsconfig.json` menyalakan `exactOptionalPropertyTypes`,
 `noUncheckedIndexedAccess`, `noUnusedLocals`, dan `noUnusedParameters` di atas
 preset strict Astro.
+
+Build menghasilkan `dist/` statis. `vercel.json` hanya mengatur header keamanan
+(CSP, X-Frame-Options, Permissions-Policy, Referrer-Policy) dan cache `/boards`;
+tidak ada rewrite. Kalau nanti deep link `/boards/:id` harus tahan refresh,
+tambahkan rewrite scoped `/boards/:path*` ke `/boards/index.html`. Jangan pakai
+catch-all ke `/index.html`: itu akan menelan `/sitemap-index.xml`, `robots.txt`,
+dan aset `/_astro`, dan `/app` tidak ada di proyek ini.
