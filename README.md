@@ -19,7 +19,7 @@ Available in **Bahasa Indonesia** · **English** · **中文**
 
 ## Preview
 
-Add real screenshots to docs/images/ and uncomment:
+
 
   <p align="center">
     <img src="docs/images/trackora-light.webp" width="48%" alt="Landing page, light theme" />
