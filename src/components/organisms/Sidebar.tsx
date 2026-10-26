@@ -192,6 +192,11 @@ export default function Sidebar({
               );
             })}
           </ul>
+          {boards.length === 0 && (
+            <p className="px-2 py-2 text-[11px] leading-relaxed text-nav-muted">
+              {t('board.emptyTitle')}
+            </p>
+          )}
         </div>
       )}
 
@@ -210,7 +215,7 @@ export default function Sidebar({
           user={user}
           theme={theme}
           placement="up"
-          align={compact ? 'start' : 'end'}
+          align="start"
           tone="inverse"
           triggerClassName={
             compact

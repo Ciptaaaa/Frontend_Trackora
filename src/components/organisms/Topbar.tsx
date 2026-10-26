@@ -60,6 +60,7 @@ export default function Topbar({
         boards={boards}
         activeId={activeBoardId}
         onSelect={onSelectBoard}
+        onNewBoard={onNewBoard}
       />
 
       {onEditBoard !== null && (

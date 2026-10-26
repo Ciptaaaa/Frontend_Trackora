@@ -2,7 +2,7 @@ import type { User } from '../../types/domain';
 
 interface AvatarProps {
   user: User;
-  size?: 'xs' | 'sm';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   tone?: 'default' | 'inverse';
 }
 const TINTS = [
@@ -28,8 +28,15 @@ function tintFor(publicId: string): string {
   return TINTS[sum % TINTS.length] ?? TINTS[0];
 }
 
+const SIZES: Record<NonNullable<AvatarProps['size']>, string> = {
+  xs: 'size-6 text-[11px]',
+  sm: 'size-8 text-xs',
+  md: 'size-10 text-sm',
+  lg: 'size-12 text-sm',
+};
+
 export default function Avatar({ user, size = 'xs', tone = 'default' }: AvatarProps) {
-  const sizeClass = size === 'xs' ? 'size-6 text-[11px]' : 'size-8 text-xs';
+  const sizeClass = SIZES[size];
   const ringClass = tone === 'inverse' ? 'ring-nav-surface' : 'ring-paper-50';
 
   return (

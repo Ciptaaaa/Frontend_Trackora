@@ -541,23 +541,42 @@ export default function AppShell({
             <Spinner label={t('app.loading')} />
           </div>
         ) : boards.length === 0 ? (
-          <div className="flex min-h-0 flex-1 items-center justify-center p-6">
-            <div className="flex max-w-xs flex-col items-center gap-3 text-center">
-              <p className="text-sm leading-relaxed text-ink-400">
-                {t('board.noBoards')}
-              </p>
+          <div className="flex min-h-0 flex-1 items-center justify-center p-6 pb-24 md:pb-6">
+            <div className="flex w-full max-w-sm flex-col items-center gap-4 rounded-2xl border border-paper-300 bg-paper-50 px-6 py-8 text-center shadow-sm">
+              <span className="flex size-12 items-center justify-center rounded-xl bg-petrol-50 text-petrol-700 ring-1 ring-petrol-200 ring-inset">
+                <Icon name="board" className="size-5" />
+              </span>
+              <div className="space-y-1.5">
+                <h2 className="text-base font-semibold text-ink-900">
+                  {t('board.emptyTitle')}
+                </h2>
+                <p className="text-sm leading-relaxed text-ink-400">
+                  {t('board.noBoards')}
+                </p>
+              </div>
               <Button size="sm" onClick={() => setBoardDialog('new')}>
+                <Icon name="plus" className="size-3.5" />
                 {t('board.new')}
               </Button>
             </div>
           </div>
         ) : boardLists.length === 0 ? (
-          <div className="flex min-h-0 flex-1 flex-col items-center justify-center gap-4 p-6 pb-24 md:pb-6">
-            <p className="max-w-xs text-center text-sm leading-relaxed text-ink-400">
-              {t('board.noLists')}
-            </p>
-            <div className="w-70">
-              <AddListForm onSubmit={handleCreateList} />
+          <div className="flex min-h-0 flex-1 flex-col items-center justify-center p-6 pb-24 md:pb-6">
+            <div className="flex w-full max-w-md flex-col items-center gap-4 rounded-2xl border border-paper-300 bg-paper-50 px-6 py-7 text-center shadow-sm">
+              <span className="flex size-12 items-center justify-center rounded-xl bg-paper-100 text-ink-600 ring-1 ring-paper-300 ring-inset">
+                <Icon name="inbox" className="size-5" />
+              </span>
+              <div className="space-y-1.5">
+                <h2 className="text-base font-semibold text-ink-900">
+                  {t('board.emptyListsTitle')}
+                </h2>
+                <p className="text-sm leading-relaxed text-ink-400">
+                  {t('board.noLists')}
+                </p>
+              </div>
+              <div className="w-full max-w-64">
+                <AddListForm onSubmit={handleCreateList} />
+              </div>
             </div>
           </div>
         ) : view !== 'all' && visibleCards.length === 0 ? (

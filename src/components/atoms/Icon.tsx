@@ -22,6 +22,9 @@ export type IconName =
   | 'trash'
   | 'check'
   | 'users'
+  | 'user'
+  | 'palette'
+  | 'logout'
   | 'more'
   | 'upload'
   | 'message';
@@ -57,6 +60,10 @@ const PATHS: Record<IconName, string> = {
   check: 'M5 13l4 4L19 7',
   users:
     'M8 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7M2 20v-1a6 6 0 0 1 12 0v1M16 4.5a3.5 3.5 0 0 1 0 7M18 20v-1a6 6 0 0 0-3-5.2',
+  user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8M4 21v-1a7 7 0 0 1 14 0v1',
+  palette:
+    'M12 3a9 9 0 1 0 0 18h1.2a1.9 1.9 0 0 0 0-3.8H12a2.2 2.2 0 0 1 0-4.4h4a4 4 0 0 0 4-4C20 5.4 16.4 3 12 3M7.5 8h.01M11 6h.01M15 7h.01M6.5 12h.01',
+  logout: 'M15 12H4M8 8l-4 4 4 4M13 4h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-6',
   more: 'M6 12h.01M12 12h.01M18 12h.01',
   upload: 'M12 16V4M8 8l4-4 4 4M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3',
   message: 'M20 15a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z',
