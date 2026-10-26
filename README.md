@@ -19,28 +19,26 @@ Available in **Bahasa Indonesia** · **English** · **中文**
 
 ## Preview
 
-<!--
-  Add real screenshots to docs/images/ and uncomment:
+Add real screenshots to docs/images/ and uncomment:
 
   <p align="center">
-    <img src="docs/images/landing-light.png" width="48%" alt="Landing page, light theme" />
-    <img src="docs/images/board-dark.png" width="48%" alt="Board view, dark theme" />
+    <img src="docs/images/trackora-light.webp" width="48%" alt="Landing page, light theme" />
+    <img src="docs/images/trackora-dark.webp" width="48%" alt="Board view, dark theme" />
   </p>
--->
 
 The **week spine** is Trackora's signature element: seven days, each showing its workload as a stack of ticks that grows with the number of cards due. Click a day to highlight the cards due on it.
 
 Example workload for one week:
 
-| Day        | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
-| ---------- | --- | --- | --- | --- | --- | --- | --- |
-| Cards due  | 1   | 2   | 1   | 0   | 3   | 1   | 0   |
+| Day       | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+| --------- | --- | --- | --- | --- | --- | --- | --- |
+| Cards due | 1   | 2   | 1   | 0   | 3   | 1   | 0   |
 
 The same cards on the board. The due chip carries urgency: overdue, due soon, or comfortably far away.
 
-| To do                        | In progress                                                    | Done                |
-| ---------------------------- | -------------------------------------------------------------- | ------------------- |
-| Revise client brief (2 days late) | Send invoice (tomorrow)<br>Competitor research (Saturday) | Tidy up the board   |
+| To do                             | In progress                                               | Done              |
+| --------------------------------- | --------------------------------------------------------- | ----------------- |
+| Revise client brief (2 days late) | Send invoice (tomorrow)<br>Competitor research (Saturday) | Tidy up the board |
 
 ## Features
 
@@ -58,16 +56,16 @@ The same cards on the board. The due chip carries urgency: overdue, due soon, or
 
 ## Tech Stack
 
-| Area       | Technology                                                   |
-| ---------- | ------------------------------------------------------------ |
-| Framework  | Astro 7, static output                                       |
-| UI         | React 19 (islands, `client:load`)                            |
-| Language   | TypeScript strict, no `any`                                  |
-| Styling    | Tailwind CSS 4 (`@tailwindcss/vite`)                         |
-| Fonts      | Noto Sans Variable · Playfair Display                        |
-| i18n       | Custom, type-checked dictionaries (id, en, zh)               |
-| SEO        | `@astrojs/sitemap`, canonical + hreflang, JSON-LD            |
-| Backend    | Go · Fiber v3 · GORM · PostgreSQL ([repo](https://github.com/Ciptaaaa/Project-Management)) |
+| Area      | Technology                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------ |
+| Framework | Astro 7, static output                                                                     |
+| UI        | React 19 (islands, `client:load`)                                                          |
+| Language  | TypeScript strict, no `any`                                                                |
+| Styling   | Tailwind CSS 4 (`@tailwindcss/vite`)                                                       |
+| Fonts     | Noto Sans Variable · Playfair Display                                                      |
+| i18n      | Custom, type-checked dictionaries (id, en, zh)                                             |
+| SEO       | `@astrojs/sitemap`, canonical + hreflang, JSON-LD                                          |
+| Backend   | Go · Fiber v3 · GORM · PostgreSQL ([repo](https://github.com/Ciptaaaa/Project-Management)) |
 
 ## Getting Started
 
@@ -79,16 +77,16 @@ cp .env.example .env     # Windows: Copy-Item .env.example .env
 npm run dev              # http://localhost:4321
 ```
 
-| Script          | Description                         |
-| --------------- | ----------------------------------- |
-| `npm run dev`   | Start the dev server                |
+| Script          | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| `npm run dev`   | Start the dev server                                 |
 | `npm run build` | Type-check with `astro check`, then build to `dist/` |
 
 ### Environment variables
 
-| Variable          | Default                       | Description                                            |
-| ----------------- | ----------------------------- | ------------------------------------------------------ |
-| `PUBLIC_API_URL`  | `http://localhost:3030`       | Base URL of the backend API                            |
+| Variable          | Default                       | Description                                             |
+| ----------------- | ----------------------------- | ------------------------------------------------------- |
+| `PUBLIC_API_URL`  | `http://localhost:3030`       | Base URL of the backend API                             |
 | `PUBLIC_SITE_URL` | `https://www.trackora.web.id` | Optional override for canonical, hreflang, and `og:url` |
 
 > **CORS:** the backend only allows `http://localhost:4321` by default. If you use another port or domain, add it to `AllowOrigins` in the backend's `main.go`.
@@ -125,12 +123,12 @@ All HTTP calls live in `src/lib/api.ts`, the single place where the backend's JS
 
 ## Routes
 
-| URL                                                | Content              |
-| -------------------------------------------------- | -------------------- |
-| `/`, `/en/`, `/zh/`                                | Landing (id, en, zh) |
-| `/login`, `/register`                              | Authentication       |
+| URL                                                | Content               |
+| -------------------------------------------------- | --------------------- |
+| `/`, `/en/`, `/zh/`                                | Landing (id, en, zh)  |
+| `/login`, `/register`                              | Authentication        |
 | `/boards`, `/boards/:id`, `/boards/:id/cards/:cid` | Board app (`noindex`) |
-| `/404`                                             | Not found            |
+| `/404`                                             | Not found             |
 
 Board URLs are created client-side with the History API, so refreshing a deep link needs a [scoped rewrite](docs/ARCHITECTURE.md#build--deployment).
 
