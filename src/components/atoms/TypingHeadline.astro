@@ -1,0 +1,149 @@
+---
+interface Props {
+  text: string;
+  class?: string;
+  /** Jeda per karakter saat mengetik, dalam milidetik. */
+  speed?: number;
+  /** Lama teks penuh ditahan sebelum dihapus, dalam milidetik. */
+  hold?: number;
+  /** Ulangi siklus ketik lalu hapus. */
+  loop?: boolean;
+  /** Jeda sebelum karakter pertama. */
+  startDelay?: number;
+}
+
+const {
+  text,
+  class: className,
+  speed = 55,
+  hold = 2400,
+  loop = true,
+  startDelay = 200,
+} = Astro.props;
+---
+
+<h1
+  class:list={[className, 'relative']}
+  data-typing-headline
+  data-speed={speed}
+  data-hold={hold}
+  data-loop={loop ? 'true' : 'false'}
+  data-start={startDelay}
+>
+  <span data-typing-full>{text}</span>
+  <span
+    class="pointer-events-none absolute inset-0 block text-balance"
+    data-typing-output
+    aria-hidden="true"></span>
+</h1>
+
+<style is:global>
+  @keyframes trackora-caret {
+    0%,
+    49% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const headline = document.querySelector('[data-typing-headline]');
+    if (!(headline instanceof HTMLElement)) return;
+
+    const full = headline.querySelector('[data-typing-full]');
+    const output = headline.querySelector('[data-typing-output]');
+    if (!(full instanceof HTMLElement) || !(output instanceof HTMLElement)) return;
+
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (media.matches) return;
+
+    const text = full.textContent ?? '';
+    if (text.length === 0) return;
+
+    const characters = Array.from(text);
+    const speed = Math.max(10, Number(headline.dataset.speed) || 55);
+    const hold = Math.max(400, Number(headline.dataset.hold) || 2400);
+    const startDelay = Math.max(0, Number(headline.dataset.start) || 200);
+    const loop = headline.dataset.loop !== 'false';
+    const deleteSpeed = Math.max(10, Math.round(speed * 0.35));
+    const gap = 500;
+
+    const caret = document.createElement('span');
+    caret.setAttribute('aria-hidden', 'true');
+    caret.style.cssText =
+      'display:inline-block;width:0.06em;height:1em;margin-left:0.06em;vertical-align:-0.08em;background:currentColor;animation:trackora-caret 1s steps(2, start) infinite;';
+
+    let index = 0;
+    let mode = 'typing';
+    let timer = 0;
+
+    function render() {
+      output.textContent = characters.slice(0, index).join('');
+      output.appendChild(caret);
+    }
+
+    function finish() {
+      window.clearTimeout(timer);
+      output.textContent = '';
+      full.style.opacity = '';
+    }
+
+    function schedule(delay) {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(step, delay);
+    }
+
+    function step() {
+      try {
+        if (mode === 'typing') {
+          if (index < characters.length) {
+            index += 1;
+            render();
+            schedule(speed);
+            return;
+          }
+          mode = 'holding';
+          schedule(hold);
+          return;
+        }
+
+        if (mode === 'holding') {
+          if (!loop) {
+            finish();
+            return;
+          }
+          mode = 'deleting';
+          schedule(deleteSpeed);
+          return;
+        }
+
+        if (index > 0) {
+          index -= 1;
+          render();
+          schedule(deleteSpeed);
+          return;
+        }
+
+        mode = 'typing';
+        schedule(gap);
+      } catch {
+        finish();
+      }
+    }
+
+    // Teks lengkap tetap ada di DOM dan layout, jadi tidak ada h1 kosong
+    // untuk crawler dan tidak ada loncatan tinggi saat animasi berjalan.
+    full.style.opacity = '0';
+    render();
+    schedule(startDelay);
+
+    media.addEventListener('change', (event) => {
+      if (event.matches) finish();
+    });
+  })();
+</script>
