@@ -1,7 +1,6 @@
-import Icon, { type IconName } from '../atoms/Icon';
+import { AnimatedThemeToggler } from '../ui/animated-theme-toggler';
 import { useT } from '../../i18n/LocaleContext';
-import type { ThemePreference } from '../../lib/theme';
-import type { TranslationKey } from '../../i18n';
+import { resolveTheme, type ThemePreference } from '../../lib/theme';
 
 interface ThemeToggleProps {
   preference: ThemePreference;
@@ -9,15 +8,6 @@ interface ThemeToggleProps {
   tone?: 'default' | 'inverse';
 }
 
-const OPTIONS: ReadonlyArray<{
-  value: ThemePreference;
-  icon: IconName;
-  labelKey: TranslationKey;
-}> = [
-  { value: 'light', icon: 'sun', labelKey: 'theme.light' },
-  { value: 'dark', icon: 'moon', labelKey: 'theme.dark' },
-  { value: 'system', icon: 'monitor', labelKey: 'theme.system' },
-];
 export default function ThemeToggle({
   preference,
   onChange,
@@ -27,37 +17,19 @@ export default function ThemeToggle({
   const inverse = tone === 'inverse';
 
   return (
-    <div
-      role="group"
-      aria-label={t('theme.label')}
-      className={`inline-flex items-center gap-0.5 rounded-lg p-0.5 ring-1 ring-inset ${
-        inverse ? 'bg-nav-surface ring-nav-border' : 'bg-paper-100 ring-paper-300 dark:ring-paper-400'
+    <AnimatedThemeToggler
+      theme={resolveTheme(preference)}
+      onThemeChange={onChange}
+      storageKey="trackora.v1.theme"
+      label={t('theme.label')}
+      title={t('theme.label')}
+      variant="circle"
+      duration={450}
+      className={`inline-flex size-11 items-center justify-center rounded-lg border transition-colors md:size-8 ${
+        inverse
+          ? 'border-nav-border bg-nav-surface text-nav-muted hover:bg-nav-raised hover:text-nav-text'
+          : 'border-paper-300 bg-paper-50 text-ink-400 hover:bg-paper-100 hover:text-ink-800 dark:border-paper-400'
       }`}
-    >
-      {OPTIONS.map((option) => {
-        const active = option.value === preference;
-        return (
-          <button
-            key={option.value}
-            type="button"
-            onClick={() => onChange(option.value)}
-            aria-pressed={active}
-            title={t(option.labelKey)}
-            className={`inline-flex size-8 items-center justify-center rounded-md transition-colors max-md:min-h-11 max-md:min-w-11 md:size-7 ${
-              active
-                ? inverse
-                  ? 'bg-nav-raised text-nav-text'
-                  : 'bg-paper-50 text-petrol-700 shadow-sm ring-1 ring-paper-300 dark:ring-paper-400'
-                : inverse
-                  ? 'text-nav-muted hover:text-nav-text'
-                  : 'text-ink-400 hover:text-ink-800'
-            }`}
-          >
-            <Icon name={option.icon} className="size-3.5" />
-            <span className="sr-only">{t(option.labelKey)}</span>
-          </button>
-        );
-      })}
-    </div>
+    />
   );
 }

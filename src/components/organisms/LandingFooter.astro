@@ -1,7 +1,7 @@
 ---
 import Logo from '../atoms/Logo.tsx';
 import LocaleLinks from '../molecules/LocaleLinks.astro';
-import LandingThemeToggle from '../molecules/LandingThemeToggle.astro';
+import { AnimatedThemeToggler } from '../ui/animated-theme-toggler';
 import type { Locale } from '../../i18n';
 import type { LandingCopy } from '../../i18n/landing';
 
@@ -130,7 +130,15 @@ const year = new Date().getFullYear();
           {copy.localeEyebrow}
         </span>
         <LocaleLinks current={locale} />
-        <LandingThemeToggle copy={copy} />
+        <AnimatedThemeToggler
+          client:load
+          storageKey="trackora.v1.theme"
+          label={copy.themeLabel}
+          variant="circle"
+          duration={450}
+          title={copy.themeLabel}
+          className="inline-flex size-11 items-center justify-center rounded-lg border border-paper-300 bg-paper-50 text-ink-600 transition-colors hover:bg-paper-100 hover:text-ink-900 dark:border-paper-400"
+        />
       </div>
       <p class="text-xs text-ink-600">© {year} Trackora</p>
     </div>
